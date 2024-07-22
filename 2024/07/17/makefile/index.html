@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>makefile | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="makefile模板 前置知识讲解 特殊符号 内置函数   代码示例说明    makefile模板前置知识讲解特殊符号 $^：表示所有的依赖文件列表，在规则中，如果有多个依赖文件，$^会将所有依赖文件都列出来，依赖之间用空格分隔。 $@：表示规则中的目标文件，如果有多个目标文件，$@只会代表当前的目标文件。  内置函数 wildcard，可以自动获取文件夹下所有cpp文件路径。1target_">
+  <meta name="description" content="1. makefile模板 1.1. 前置知识讲解 1.1.1. 特殊符号 1.1.2. 内置函数   1.2. 代码示例说明    1. makefile模板1.1. 前置知识讲解1.1.1. 特殊符号 $^：表示所有的依赖文件列表，在规则中，如果有多个依赖文件，$^会将所有依赖文件都列出来，依赖之间用空格分隔。 $@：表示规则中的目标文件，如果有多个目标文件，$@只会代表当前的目标文件。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="makefile">
 <meta property="og:url" content="http://example.com/2024/07/17/makefile/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="makefile模板 前置知识讲解 特殊符号 内置函数   代码示例说明    makefile模板前置知识讲解特殊符号 $^：表示所有的依赖文件列表，在规则中，如果有多个依赖文件，$^会将所有依赖文件都列出来，依赖之间用空格分隔。 $@：表示规则中的目标文件，如果有多个目标文件，$@只会代表当前的目标文件。  内置函数 wildcard，可以自动获取文件夹下所有cpp文件路径。1target_">
+<meta property="og:description" content="1. makefile模板 1.1. 前置知识讲解 1.1.1. 特殊符号 1.1.2. 内置函数   1.2. 代码示例说明    1. makefile模板1.1. 前置知识讲解1.1.1. 特殊符号 $^：表示所有的依赖文件列表，在规则中，如果有多个依赖文件，$^会将所有依赖文件都列出来，依赖之间用空格分隔。 $@：表示规则中的目标文件，如果有多个目标文件，$@只会代表当前的目标文件。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-07-17T01:17:52.000Z">
-<meta property="article:modified_time" content="2024-07-19T07:56:00.390Z">
+<meta property="article:modified_time" content="2024-07-19T07:57:10.896Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="makefile">
 <meta name="twitter:card" content="summary">
@@ -176,25 +176,25 @@
     <div class="article-entry" itemprop="articleBody">
       
         <ul>
-<li><a href="#makefile%E6%A8%A1%E6%9D%BF">makefile模板</a><ul>
-<li><a href="#%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86%E8%AE%B2%E8%A7%A3">前置知识讲解</a><ul>
-<li><a href="#%E7%89%B9%E6%AE%8A%E7%AC%A6%E5%8F%B7">特殊符号</a></li>
-<li><a href="#%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0">内置函数</a></li>
+<li><a href="#1-makefile%E6%A8%A1%E6%9D%BF">1. makefile模板</a><ul>
+<li><a href="#11-%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86%E8%AE%B2%E8%A7%A3">1.1. 前置知识讲解</a><ul>
+<li><a href="#111-%E7%89%B9%E6%AE%8A%E7%AC%A6%E5%8F%B7">1.1.1. 特殊符号</a></li>
+<li><a href="#112-%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0">1.1.2. 内置函数</a></li>
 </ul>
 </li>
-<li><a href="#%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B%E8%AF%B4%E6%98%8E">代码示例说明</a></li>
+<li><a href="#12-%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B%E8%AF%B4%E6%98%8E">1.2. 代码示例说明</a></li>
 </ul>
 </li>
 </ul>
-<h1 id="makefile模板"><a href="#makefile模板" class="headerlink" title="makefile模板"></a>makefile模板</h1><h2 id="前置知识讲解"><a href="#前置知识讲解" class="headerlink" title="前置知识讲解"></a>前置知识讲解</h2><h3 id="特殊符号"><a href="#特殊符号" class="headerlink" title="特殊符号"></a>特殊符号</h3><ol>
+<h1 id="1-makefile模板"><a href="#1-makefile模板" class="headerlink" title="1. makefile模板"></a>1. makefile模板</h1><h2 id="1-1-前置知识讲解"><a href="#1-1-前置知识讲解" class="headerlink" title="1.1. 前置知识讲解"></a>1.1. 前置知识讲解</h2><h3 id="1-1-1-特殊符号"><a href="#1-1-1-特殊符号" class="headerlink" title="1.1.1. 特殊符号"></a>1.1.1. 特殊符号</h3><ol>
 <li>$^：表示所有的依赖文件列表，在规则中，如果有多个依赖文件，$^会将所有依赖文件都列出来，依赖之间用空格分隔。</li>
 <li>$@：表示规则中的目标文件，如果有多个目标文件，$@只会代表当前的目标文件。</li>
 </ol>
-<h3 id="内置函数"><a href="#内置函数" class="headerlink" title="内置函数"></a>内置函数</h3><ol>
+<h3 id="1-1-2-内置函数"><a href="#1-1-2-内置函数" class="headerlink" title="1.1.2. 内置函数"></a>1.1.2. 内置函数</h3><ol>
 <li>wildcard，可以自动获取文件夹下所有cpp文件路径。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">target_cpp := $(wildcard $(SERVER_DIR)/*.cpp)</span><br></pre></td></tr></table></figure></li>
 <li>info，向标准输出打印文本 <text> ，用于输出调试信息。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(info &quot;info: $(target_cpp)&quot;)  # 打印变量值</span><br></pre></td></tr></table></figure></li>
 </ol>
-<h2 id="代码示例说明"><a href="#代码示例说明" class="headerlink" title="代码示例说明"></a>代码示例说明</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"># Compiler and flags</span><br><span class="line">CXX = g++</span><br><span class="line">CPPFLAGS = -std=c++11 -Wall -g </span><br><span class="line">LINK = ar rcs</span><br><span class="line"></span><br><span class="line">all: target</span><br><span class="line"></span><br><span class="line">LIBS = lib1.a </span><br><span class="line"></span><br><span class="line">INCLUDE_DIR = -I/</span><br><span class="line"></span><br><span class="line">#### lib1 ##########</span><br><span class="line">LIB1_DIR = src/lib1_dir</span><br><span class="line">INCLUDE_DIR += -I$(LIB1_DIR)</span><br><span class="line">lib1_cpp = $(wildcard $(LIB1_DIR)/*.cpp)</span><br><span class="line">lib1_o := $(lib1_cpp:.cpp=.o)</span><br><span class="line"></span><br><span class="line">lib1.a: $&#123;lib1_o&#125;</span><br><span class="line">	$&#123;LINK&#125; $@ $^</span><br><span class="line"></span><br><span class="line"># 这是一个通用的模板方法，指示了TARGET_DIR文件夹下的.cpp文件如何生成.o文件。</span><br><span class="line">$(LIB1_DIR)/%.o: $(LIB1_DIR)/%.cpp</span><br><span class="line">	$&#123;CXX&#125; $&#123;CPPFLAGS&#125; -I$&#123;LIN1_INCLUDE&#125; -c $^ -o $@</span><br><span class="line"></span><br><span class="line">#### target #########</span><br><span class="line"></span><br><span class="line">TARGET_DIR = src/target_dir</span><br><span class="line">target_cpp := $(wildcard $(SERVER_DIR)/*.cpp)</span><br><span class="line">target_o := $(target_cpp:.cpp=.o)</span><br><span class="line"></span><br><span class="line">xidserver: $&#123;target_o&#125; $&#123;LIBS&#125;</span><br><span class="line">	$&#123;XIDS_CXX&#125; $&#123;XIDS_CPPFLAGS&#125; $&#123;INCLUDE_DIR&#125; -o $@ $^</span><br><span class="line"></span><br><span class="line">$(TARGET_DIR)/%.o: $(TARGET_DIR)/%.cpp</span><br><span class="line">	$&#123;CXX&#125; $&#123;CPPFLAGS&#125; $&#123;INCLUDE_DIR&#125; -c $^ -o $@</span><br><span class="line"></span><br><span class="line">.PHONY: clean</span><br><span class="line"></span><br><span class="line">clean:</span><br><span class="line">	rm -f $(LIB1_DIR)/*.o</span><br><span class="line">	rm -f $(TARGET_DIR)/*.o</span><br></pre></td></tr></table></figure>
+<h2 id="1-2-代码示例说明"><a href="#1-2-代码示例说明" class="headerlink" title="1.2. 代码示例说明"></a>1.2. 代码示例说明</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"># Compiler and flags</span><br><span class="line">CXX = g++</span><br><span class="line">CPPFLAGS = -std=c++11 -Wall -g </span><br><span class="line">LINK = ar rcs</span><br><span class="line"></span><br><span class="line">all: target</span><br><span class="line"></span><br><span class="line">LIBS = lib1.a </span><br><span class="line"></span><br><span class="line">INCLUDE_DIR = -I/</span><br><span class="line"></span><br><span class="line">#### lib1 ##########</span><br><span class="line">LIB1_DIR = src/lib1_dir</span><br><span class="line">INCLUDE_DIR += -I$(LIB1_DIR)</span><br><span class="line">lib1_cpp = $(wildcard $(LIB1_DIR)/*.cpp)</span><br><span class="line">lib1_o := $(lib1_cpp:.cpp=.o)</span><br><span class="line"></span><br><span class="line">lib1.a: $&#123;lib1_o&#125;</span><br><span class="line">	$&#123;LINK&#125; $@ $^</span><br><span class="line"></span><br><span class="line"># 这是一个通用的模板方法，指示了TARGET_DIR文件夹下的.cpp文件如何生成.o文件。</span><br><span class="line">$(LIB1_DIR)/%.o: $(LIB1_DIR)/%.cpp</span><br><span class="line">	$&#123;CXX&#125; $&#123;CPPFLAGS&#125; -I$&#123;LIN1_INCLUDE&#125; -c $^ -o $@</span><br><span class="line"></span><br><span class="line">#### target #########</span><br><span class="line"></span><br><span class="line">TARGET_DIR = src/target_dir</span><br><span class="line">target_cpp := $(wildcard $(SERVER_DIR)/*.cpp)</span><br><span class="line">target_o := $(target_cpp:.cpp=.o)</span><br><span class="line"></span><br><span class="line">xidserver: $&#123;target_o&#125; $&#123;LIBS&#125;</span><br><span class="line">	$&#123;XIDS_CXX&#125; $&#123;XIDS_CPPFLAGS&#125; $&#123;INCLUDE_DIR&#125; -o $@ $^</span><br><span class="line"></span><br><span class="line">$(TARGET_DIR)/%.o: $(TARGET_DIR)/%.cpp</span><br><span class="line">	$&#123;CXX&#125; $&#123;CPPFLAGS&#125; $&#123;INCLUDE_DIR&#125; -c $^ -o $@</span><br><span class="line"></span><br><span class="line">.PHONY: clean</span><br><span class="line"></span><br><span class="line">clean:</span><br><span class="line">	rm -f $(LIB1_DIR)/*.o</span><br><span class="line">	rm -f $(TARGET_DIR)/*.o</span><br></pre></td></tr></table></figure>
       
 
       
@@ -436,6 +436,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">加解密算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">DC系列靶机攻略</a>
               </li>
              
               <li class="article-tag-list-item">
