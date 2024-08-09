@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>linux commond | readers</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="netstat1netstat -nat n：该参数表示使用数字形式显示地址和端口号，而不进行主机名和服务名称的反向解析。这样做可以提高显示速度，尤其是在有大量连接时。a：该参数表示显示所有的连接状态，包括监听状态的套接字。默认情况下，netstat 只显示活动连接。t：该参数表示仅显示TCP连接。 ps1ps aux a：显示所有用户的进程，而不仅仅是当前用户的进程。通常情况下，如果没有指定 -">
+  <meta name="description" content="ncat连接1ncat 192.168.148.177 22 -vvvp 61040 -vvv: 设置 ncat 在非常详细的输出模式下运行，显示更多关于连接和数据传输的详细信息。-p 61040: 指定 ncat 在本地使用的端口号为 61040。 监听1ncat -l -p 5000 -l: 这个选项表示 ncat 要监听（listen）。在网络通信中，监听模式用于等待传入的连接请求，而不是主">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux commond">
 <meta property="og:url" content="http://example.com/2024/07/30/linux-commond/index.html">
 <meta property="og:site_name" content="readers">
-<meta property="og:description" content="netstat1netstat -nat n：该参数表示使用数字形式显示地址和端口号，而不进行主机名和服务名称的反向解析。这样做可以提高显示速度，尤其是在有大量连接时。a：该参数表示显示所有的连接状态，包括监听状态的套接字。默认情况下，netstat 只显示活动连接。t：该参数表示仅显示TCP连接。 ps1ps aux a：显示所有用户的进程，而不仅仅是当前用户的进程。通常情况下，如果没有指定 -">
+<meta property="og:description" content="ncat连接1ncat 192.168.148.177 22 -vvvp 61040 -vvv: 设置 ncat 在非常详细的输出模式下运行，显示更多关于连接和数据传输的详细信息。-p 61040: 指定 ncat 在本地使用的端口号为 61040。 监听1ncat -l -p 5000 -l: 这个选项表示 ncat 要监听（listen）。在网络通信中，监听模式用于等待传入的连接请求，而不是主">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-07-30T08:22:34.000Z">
-<meta property="article:modified_time" content="2024-07-30T08:26:48.564Z">
+<meta property="article:modified_time" content="2024-08-06T06:08:43.544Z">
 <meta property="article:author" content="anonymous">
 <meta property="article:tag" content="readers">
 <meta name="twitter:card" content="summary">
@@ -65,6 +65,8 @@
 				<li><a href="/2024/07/26/%E7%BD%91%E5%9D%80%E5%AF%BC%E8%88%AA">网址导航</a></li>
 	        
 				<li><a href="/tags/DC%E7%B3%BB%E5%88%97%E9%9D%B6%E6%9C%BA%E6%94%BB%E7%95%A5/">靶机攻略</a></li>
+	        
+				<li><a href="/tags/rootkit/">rootkit</a></li>
 	        
 			</ul>
 		</nav>
@@ -126,6 +128,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -146,13 +150,15 @@
 				<ul style="width: 70%">
 				
 				
-					<li style="width: 25%"><a href="/">主页</a></li>
+					<li style="width: 20%"><a href="/">主页</a></li>
 		        
-					<li style="width: 25%"><a href="/2024/07/26/kali-linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4">常用命令</a></li>
+					<li style="width: 20%"><a href="/2024/07/26/kali-linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4">常用命令</a></li>
 		        
-					<li style="width: 25%"><a href="/2024/07/26/%E7%BD%91%E5%9D%80%E5%AF%BC%E8%88%AA">网址导航</a></li>
+					<li style="width: 20%"><a href="/2024/07/26/%E7%BD%91%E5%9D%80%E5%AF%BC%E8%88%AA">网址导航</a></li>
 		        
-					<li style="width: 25%"><a href="/tags/DC%E7%B3%BB%E5%88%97%E9%9D%B6%E6%9C%BA%E6%94%BB%E7%95%A5/">靶机攻略</a></li>
+					<li style="width: 20%"><a href="/tags/DC%E7%B3%BB%E5%88%97%E9%9D%B6%E6%9C%BA%E6%94%BB%E7%95%A5/">靶机攻略</a></li>
+		        
+					<li style="width: 20%"><a href="/tags/rootkit/">rootkit</a></li>
 		        
 				</ul>
 			</nav>
@@ -187,7 +193,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="netstat"><a href="#netstat" class="headerlink" title="netstat"></a>netstat</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -nat</span><br></pre></td></tr></table></figure>
+        <h1 id="ncat"><a href="#ncat" class="headerlink" title="ncat"></a>ncat</h1><h2 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ncat 192.168.148.177 22 -vvvp 61040</span><br></pre></td></tr></table></figure>
+<p>-vvv: 设置 ncat 在非常详细的输出模式下运行，显示更多关于连接和数据传输的详细信息。<br>-p 61040: 指定 ncat 在本地使用的端口号为 61040。</p>
+<h2 id="监听"><a href="#监听" class="headerlink" title="监听"></a>监听</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ncat -l -p 5000</span><br></pre></td></tr></table></figure>
+<p>-l: 这个选项表示 ncat 要监听（listen）。在网络通信中，监听模式用于等待传入的连接请求，而不是主动发起连接。当 ncat 处于监听模式时，它会等待其他计算机通过网络连接到它指定的端口。<br>-p 5000: 这个部分指定了监听的端口号（port）。在这里，5000 是指定的端口号。</p>
+<h1 id="netstat"><a href="#netstat" class="headerlink" title="netstat"></a>netstat</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -nat</span><br></pre></td></tr></table></figure>
 <p>n：该参数表示使用数字形式显示地址和端口号，而不进行主机名和服务名称的反向解析。这样做可以提高显示速度，尤其是在有大量连接时。<br>a：该参数表示显示所有的连接状态，包括监听状态的套接字。默认情况下，netstat 只显示活动连接。<br>t：该参数表示仅显示TCP连接。</p>
 <h1 id="ps"><a href="#ps" class="headerlink" title="ps"></a>ps</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps aux</span><br></pre></td></tr></table></figure>
 <p>a：显示所有用户的进程，而不仅仅是当前用户的进程。通常情况下，如果没有指定 -u 选项，ps 命令只会显示当前用户的进程。使用 a 选项可以显示所有用户的进程。<br>u：以用户为主要的格式显示进程信息。包括USER、PID、%CPU、%MEM、VSZ、RSS、TTY、STAT、START 和 COMMAND 等字段。这个选项用于显示与进程相关的用户信息。<br>x：显示没有控制终端的进程。这些通常是守护进程或者在后台运行的进程，它们不与任何控制终端关联。使用 x 选项可以显示这些进程，即使它们没有控制终端。</p>
@@ -429,6 +439,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">DVWA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">快捷键</a>
               </li>
              
@@ -446,6 +460,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">makefile</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">rootkit</a>
               </li>
              
               <li class="article-tag-list-item">
